@@ -1,0 +1,40 @@
+.navbar {
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; */
+
+    background: #101010;
+}
+
+.logo {
+    font-size: 25px;
+    text-transform: uppercase;
+    color: rgb(85, 47, 192);
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    padding: 25px 0;
+    gap: 100px;
+}
+
+.navBarList {
+    display: flex;
+    gap: 20px;
+}
+
+.navBarLink {
+    color: rgba(255, 255, 255, 0.654);
+    font-size: 22px;
+    transition: color 300ms;
+}
+
+.navBarLink:hover {
+    color: rgb(255, 255, 255);
+}
+
+.navBarLinkActive {
+    color: rgb(255, 255, 255);
+}

@@ -1,0 +1,76 @@
+.movieSlider {
+  position: relative;
+}
+
+.swiper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  overflow: visible !important;
+}
+
+.swiperSlide {
+  text-align: center;
+  font-size: 18px;
+  background: transparent;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.movieItem {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: visible;
+}
+
+.movieItemFirst {
+  width: 30px;
+  height: 100%;
+  background: transparent;
+}
+
+.buttonPrev,
+.buttonNext {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  height: 120%;
+  width: 70px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 500;
+}
+
+.btnDisabled {
+  display: none;
+}
+
+.btn {
+  transition: 200ms ease;
+}
+
+.buttonPrev:hover .btn,
+.buttonNext:hover .btn {
+  transform: scale(1.2);
+}
+
+.buttonPrev {
+  left: 0;
+  background: linear-gradient(to right, #141414, transparent);
+}
+
+.buttonNext {
+  right: 0;
+  background: linear-gradient(to left, #141414, transparent);
+}

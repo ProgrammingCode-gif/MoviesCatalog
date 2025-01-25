@@ -1,0 +1,15 @@
+.series {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.seriesTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 22px;
+    cursor: pointer;
+}
