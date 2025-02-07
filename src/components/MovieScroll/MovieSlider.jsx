@@ -1,10 +1,10 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Navigation, Mousewheel, FreeMode } from 'swiper/modules';
 import styles from './MovieSlider.module.css';
-import 'swiper/css/navigation';
+import 'swiper/css/navigation'; 
 import MovieCard from '../MovieCard/MovieCard';
 import Container from '../Container/Container';
 
@@ -16,19 +16,32 @@ const MovieSlider = ({ movies, topRated }) => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
-    // Используем useRef для уникальных кнопок навигации
+    const swiperRef = useRef(null);
     const prevButtonRef = useRef(null);
     const nextButtonRef = useRef(null);
 
     const handleSlideChange = useCallback((swiper) => {
-        setIsBeginning(swiper.isBeginning || swiper.progress <= 0);
-        setIsEnd(swiper.isEnd || swiper.progress >= 1);
+        setIsBeginning(swiper.isBeginning);
+        setIsEnd(swiper.isEnd);
+    }, []);
+
+    useEffect(() => {
+        if (swiperRef.current) {
+            const swiperInstance = swiperRef.current.swiper;
+            if (swiperInstance) {
+                swiperInstance.params.navigation.prevEl = prevButtonRef.current;
+                swiperInstance.params.navigation.nextEl = nextButtonRef.current;
+                swiperInstance.navigation.init();
+                swiperInstance.navigation.update();
+            }
+        }
     }, []);
 
     return (
         <div className={styles.movieSlider}>
             <Container>
                 <Swiper
+                    ref={swiperRef}
                     slidesPerView={'auto'}
                     spaceBetween={10}
                     modules={[Mousewheel, Navigation, FreeMode]}
@@ -46,29 +59,15 @@ const MovieSlider = ({ movies, topRated }) => {
                         prevEl: prevButtonRef.current,
                     }}
                     onSlideChange={handleSlideChange}
-                    onSetTranslate={handleSlideChange}
-                    onInit={(swiper) => {
-                        swiper.params.navigation.prevEl = prevButtonRef.current;
-                        swiper.params.navigation.nextEl = nextButtonRef.current;
-                        swiper.navigation.init();
-                        swiper.navigation.update();
-
-                        handleSlideChange(swiper);
-                    }}
                     className={styles.swiper}
                 >
                     {movies?.map((movie, index) => (
                         <SwiperSlide key={movie.id} className={styles.movieItem}>
-                            {
-                                topRated ? 
-                                    <TopRatedCard top={(index + 1)} posterPath={movie.poster_path}
-                                    /> 
-                                :
-                                    <MovieCard
-                                        posterPath={movie.poster_path}
-                                        title={movie.title || movie.name}
-                                    />
-                            }
+                            {topRated ? (
+                                <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
+                            ) : (
+                                <MovieCard posterPath={movie.poster_path} title={movie.title || movie.name} />
+                            )}
                         </SwiperSlide>
                     ))}
                 </Swiper>
