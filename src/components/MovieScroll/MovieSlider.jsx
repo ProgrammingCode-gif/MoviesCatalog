@@ -19,7 +19,7 @@ const MovieSlider = ({ movies, topRated }) => {
     const prevButtonRef = useRef(null);
     const nextButtonRef = useRef(null);
 
-    // Обновление кнопок навигации
+    // Функция обновления состояния навигации
     const updateNavigationState = useCallback(() => {
         if (!swiperRef.current) return;
         const swiper = swiperRef.current.swiper;
@@ -38,8 +38,12 @@ const MovieSlider = ({ movies, topRated }) => {
             swiperInstance.navigation.update();
             updateNavigationState();
 
-            // Следим за обновлениями в `progress`
+            // Добавляем события для мгновенного обновления состояния кнопок
+            swiperInstance.on('slideChange', updateNavigationState);
             swiperInstance.on('progress', updateNavigationState);
+            swiperInstance.on('touchMove', updateNavigationState);
+            swiperInstance.on('transitionEnd', updateNavigationState);
+            swiperInstance.on('scroll', updateNavigationState); // исправление для плавной прокрутки
         }
     }, [updateNavigationState]);
 
@@ -64,8 +68,6 @@ const MovieSlider = ({ movies, topRated }) => {
                         nextEl: nextButtonRef.current,
                         prevEl: prevButtonRef.current,
                     }}
-                    onSlideChange={updateNavigationState}
-                    onProgress={updateNavigationState} // Теперь обновляется даже при скролле
                     className={styles.swiper}
                 >
                     {movies?.map((movie, index) => (
