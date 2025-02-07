@@ -64,6 +64,25 @@ class API {
             return ''
         }
     }
+
+    async getTopTenRatedMovies() {
+        try {
+            const response = await axios.get(`${BASE_URL}/movie/top_rated`, params)
+            return response.data.results.slice(0, 10)
+        } catch (error) {
+            console.log(error);
+            return []
+        }
+    }
+
+    async getTrendingMovies() {
+        try {
+            const response = await axios.get(`${BASE_URL}/trending/movie/week`, params)
+            return response.data.results.slice(0, 8)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 export default new API()

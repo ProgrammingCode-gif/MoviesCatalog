@@ -10,8 +10,9 @@ import Container from '../Container/Container';
 
 import { SlArrowRight } from 'react-icons/sl';
 import { SlArrowLeft } from 'react-icons/sl';
+import TopRatedCard from '../TopRatedCard/TopRatedCard';
 
-const MovieSlider = ({ movies }) => {
+const MovieSlider = ({ movies, topRated }) => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
@@ -56,12 +57,18 @@ const MovieSlider = ({ movies }) => {
                     }}
                     className={styles.swiper}
                 >
-                    {movies.map((movie) => (
+                    {movies?.map((movie, index) => (
                         <SwiperSlide key={movie.id} className={styles.movieItem}>
-                            <MovieCard
-                                posterPath={movie.poster_path}
-                                title={movie.title}
-                            />
+                            {
+                                topRated ? 
+                                    <TopRatedCard top={(index + 1)} posterPath={movie.poster_path}
+                                    /> 
+                                :
+                                    <MovieCard
+                                        posterPath={movie.poster_path}
+                                        title={movie.title || movie.name}
+                                    />
+                            }
                         </SwiperSlide>
                     ))}
                 </Swiper>

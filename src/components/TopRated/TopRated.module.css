@@ -1,0 +1,15 @@
+.topRated {
+    /* background: rgb(98,10,10);
+    background: linear-gradient(325deg, rgba(98,10,10,1) 26%, rgba(73,14,110,1) 68%, rgba(16,85,157,1) 99%); */
+    padding: 30px 0 30px 0;
+    background: rgb(119,22,22);
+    background: linear-gradient(325deg, rgba(119,22,22,0.5439425770308124) 2%, rgba(90,13,138,0.5439425770308124) 74%, rgba(16,85,157,0.54) 99%);
+    height: 600px;
+}
+
+.title {
+    font-family: Montserrat;
+    font-size: 30px;
+    font-weight: 700;
+    font-style: italic;
+}

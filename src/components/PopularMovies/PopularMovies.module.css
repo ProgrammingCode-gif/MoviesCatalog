@@ -2,8 +2,7 @@
     margin-top: 100px;
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    /* height: 10px; */
+    gap: 30px;
 }
 
 .title {

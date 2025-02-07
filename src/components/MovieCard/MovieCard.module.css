@@ -44,7 +44,7 @@
     text-align: center;
     position: relative;
     color: white;
-    transition: 400ms;
+    transition: 300ms;
 }
 
 .movieCard::after {
