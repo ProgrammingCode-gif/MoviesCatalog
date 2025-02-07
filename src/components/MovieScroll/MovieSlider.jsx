@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -16,7 +16,6 @@ const MovieSlider = ({ movies, topRated }) => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
-    const swiperRef = useRef()
     const prevButtonRef = useRef(null);
     const nextButtonRef = useRef(null);
 
@@ -25,21 +24,10 @@ const MovieSlider = ({ movies, topRated }) => {
         setIsEnd(swiper.isEnd || swiper.progress >= 1);
     }, []);
 
-    useEffect(() => {
-        if(swiperRef.current) {
-            const swiperInstance = swiperRef.current.swiper
-            swiperInstance.params.navigation.prevEl = prevButtonRef.current;
-            swiperInstance.params.navigation.nextEl = nextButtonRef.current;
-            swiperInstance.navigation.init();
-            swiperInstance.navigation.update();
-        }
-    }, [])
-
     return (
         <div className={styles.movieSlider}>
             <Container>
                 <Swiper
-                    ref={swiperRef}
                     slidesPerView={'auto'}
                     spaceBetween={10}
                     modules={[Mousewheel, Navigation, FreeMode]}
@@ -57,7 +45,15 @@ const MovieSlider = ({ movies, topRated }) => {
                         prevEl: prevButtonRef.current,
                     }}
                     onSlideChange={handleSlideChange}
-                    // onSetTranslate={handleSlideChange}
+                    onSetTranslate={handleSlideChange}
+                    onInit={(swiper) => {
+                        swiper.params.navigation.prevEl = prevButtonRef.current;
+                        swiper.params.navigation.nextEl = nextButtonRef.current;
+                        swiper.navigation.init();
+                        swiper.navigation.update();
+
+                        handleSlideChange(swiper);
+                    }}
                     className={styles.swiper}
                 >
                     {movies?.map((movie, index) => (
