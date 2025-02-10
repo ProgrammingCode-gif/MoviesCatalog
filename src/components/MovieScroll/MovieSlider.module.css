@@ -1,5 +1,7 @@
 .movieSlider {
   position: relative;
+  overflow: hidden;
+  width: 100vw;
 }
 
 .swiper {
