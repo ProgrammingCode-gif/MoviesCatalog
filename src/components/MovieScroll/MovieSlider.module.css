@@ -31,12 +31,6 @@
   overflow-y: visible;
 }
 
-.movieItemFirst {
-  width: 30px;
-  height: 100%;
-  background: transparent;
-}
-
 .buttonPrev,
 .buttonNext {
   color: #fff;
