@@ -4,7 +4,7 @@ import Container from '../Container/Container'
 import SwapperNextLoading from '../SwapperNextLoading/SwapperNextLoading'
 import styles from './MovieSwapperItem.module.css'
 
-const MovieSwapperItem = ({ movie, activeMovie, movies, nextMovieIndex }) => {
+const MovieSwapperItem = ({ movie, activeMovie, movies, nextMovieIndex, setActiveMovie }) => {
     return (
 
             <div className={styles.wrapper}>
@@ -51,7 +51,7 @@ const MovieSwapperItem = ({ movie, activeMovie, movies, nextMovieIndex }) => {
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 1, delay: 0.2 }}
                     >
-                        <SwapperNextLoading nextMovie={movies[nextMovieIndex]} />
+                        <SwapperNextLoading setNextMovie={setActiveMovie} nextMovie={movies[nextMovieIndex]} />
                     </motion.div>)}
             </div>
     )

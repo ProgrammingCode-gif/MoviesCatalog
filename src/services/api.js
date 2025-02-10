@@ -83,6 +83,15 @@ class API {
             console.log(error);
         }
     }
+    async getMovieDetails(movieId) {
+        try {
+            const response = await axios.get(`${BASE_URL}/movie/${movieId}`, params)
+            // console.log(response.data);
+            return response.data
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 export default new API()

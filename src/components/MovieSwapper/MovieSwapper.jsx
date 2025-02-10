@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -12,6 +12,10 @@ const MovieSwapper = () => {
     const [loading, setLoading] = useState(true)
     const [activeMovie, setActiveMovie] = useState(null);
     const [nextMovieIndex, setNextMovieIndex] = useState(1)
+
+    const setNextMovie = useCallback(() => {
+        setActiveMovie(movies[nextMovieIndex])
+    }, [])
 
     useEffect(() => {
         const getMovies = async () => {
@@ -47,7 +51,7 @@ const MovieSwapper = () => {
         >
             {
             !loading &&
-                movies.map(movie => <SwiperSlide key={movie.id}><MovieSwapperItem movie={movie} movies={movies} activeMovie={activeMovie} nextMovieIndex={nextMovieIndex}/> </SwiperSlide>)
+                movies.map(movie => <SwiperSlide key={movie.id}><MovieSwapperItem setActiveMovie={setActiveMovie} movie={movie} movies={movies} activeMovie={activeMovie} nextMovieIndex={nextMovieIndex}/> </SwiperSlide>)
             }
         </Swiper>
     )

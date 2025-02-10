@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Navigation, Mousewheel, FreeMode } from 'swiper/modules';
 import styles from './MovieSlider.module.css';
-import 'swiper/css/navigation'; 
+import 'swiper/css/navigation';
 import MovieCard from '../MovieCard/MovieCard';
 import Container from '../Container/Container';
 
@@ -49,38 +49,41 @@ const MovieSlider = ({ movies, topRated }) => {
 
     return (
         <div className={styles.movieSlider}>
-            <Container>
-                <Swiper
-                    ref={swiperRef}
-                    slidesPerView={'auto'}
-                    spaceBetween={10}
-                    modules={[Mousewheel, Navigation, FreeMode]}
-                    freeMode={{
-                        enabled: true,
-                        momentum: true,
-                    }}
-                    mousewheel={{
-                        enabled: true,
-                        forceToAxis: true,
-                        releaseOnEdges: false,
-                    }}
-                    navigation={{
-                        nextEl: nextButtonRef.current,
-                        prevEl: prevButtonRef.current,
-                    }}
-                    className={styles.swiper}
-                >
-                    {movies?.map((movie, index) => (
-                        <SwiperSlide key={movie.id} className={styles.movieItem}>
-                            {topRated ? (
-                                <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
-                            ) : (
-                                <MovieCard posterPath={movie.poster_path} title={movie.title || movie.name} />
-                            )}
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            </Container>
+                <Container>
+                    <Swiper
+                        ref={swiperRef}
+                        slidesPerView={'auto'}
+                        spaceBetween={10}
+                        modules={[Mousewheel, Navigation, FreeMode]}
+                        freeMode={{
+                            enabled: true,
+                            momentum: true,
+                            momentumRatio: 0.5,
+                            momentumVelocityRatio: 0.8,
+                        }}
+                        mousewheel={{
+                            enabled: true,
+                            forceToAxis: true,
+                            releaseOnEdges: false,
+                        }}
+                        navigation={{
+                            nextEl: nextButtonRef.current,
+                            prevEl: prevButtonRef.current,
+                        }}
+                        className={styles.swiper}
+                    >
+                        {movies?.map((movie, index) => (
+                            <SwiperSlide key={movie.id} className={styles.movieItem}>
+                                {topRated ? (
+                                    <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
+                                ) : (
+                                    <MovieCard posterPath={movie.poster_path} title={movie.title || movie.name} />
+                                )}
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </Container>
+
 
             <div
                 ref={prevButtonRef}

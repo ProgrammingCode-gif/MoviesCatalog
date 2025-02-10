@@ -1,8 +1,8 @@
 import styles from './Container.module.css'
 
-const Container = ({children, width = 1280, className = ''}) => {
+const Container = ({children, className = ''}) => {
   return (
-    <div style={{maxWidth: width}} className={`${styles.container} ${className}`}>{children}</div>
+    <div className={`${styles.container} ${className}`}>{children}</div>
   )
 }
 
