@@ -2,13 +2,13 @@
   position: relative;
   overflow: hidden;
   width: 100vw;
+  height: 330px;
 }
 
 .swiper {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 300px;
   overflow: visible !important;
 }
 

@@ -11,10 +11,10 @@ const Home = () => {
     <div>
         <MovieSwapper />
         <PopularMovies />
+        <TrailerPreview movieId={939243} />
         <PopularSeries />
         <TopRated />
 
-        <TrailerPreview movieId={939243} />
     </div>
   )
 }
