@@ -57,7 +57,7 @@ class API {
             );
             console.log(trailer);
 
-            return trailer ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1&loop=1&controls=0&mute=1&playlist=${trailer.key}&modestbranding=1&showinfo=0&rel=0&playsinline=1&disablekb=1&fs=0&cc_load_policy=0&iv_load_policy=3&autohide=1` : null;
+            return trailer ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1&loop=1&controls=0&mute=1&playlist=${trailer.key}` : null;
         } catch (error) {
             console.error('Ошибка при получении трейлера:', error);
             return ''
