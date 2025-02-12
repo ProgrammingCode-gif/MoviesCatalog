@@ -3,6 +3,7 @@ import { SwiperSlide } from 'swiper/react'
 import Container from '../Container/Container'
 import SwapperNextLoading from '../SwapperNextLoading/SwapperNextLoading'
 import styles from './MovieSwapperItem.module.css'
+import { Link } from 'react-router-dom'
 
 const MovieSwapperItem = ({ movie, activeMovie, movies, nextMovieIndex, setActiveMovie }) => {
     return (
@@ -30,15 +31,17 @@ const MovieSwapperItem = ({ movie, activeMovie, movies, nextMovieIndex, setActiv
                             >
                                 {movie.overview}
                             </motion.p>
-                            <motion.button
-                                className={styles.currentMovieBtn}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 1, ease: "easeInOut" }}
-                            >
-                                Подробнее
-                            </motion.button>
+                            <Link to={`/movie/${movie.id}`}>
+                                <motion.button
+                                    className={styles.currentMovieBtn}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 1, ease: "easeInOut" }}
+                                >
+                                    Подробнее
+                                </motion.button>
+                            </Link>
                         </Container>
                     )}
                     <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt="" />

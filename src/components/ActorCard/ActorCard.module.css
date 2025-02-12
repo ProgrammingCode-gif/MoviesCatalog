@@ -1,0 +1,23 @@
+.actorInfo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+    gap: 5px;
+    border: 1px solid #fff;
+    border-radius: 25px;
+}
+
+.actorPhoto {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.actorName {
+    font-family: Raleway;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+}

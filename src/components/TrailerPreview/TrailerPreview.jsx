@@ -4,6 +4,7 @@ import api from '../../services/api'
 import utils from '../../utils/utils'
 
 import styles from './TrailerPreview.module.css'
+import ActorCard from '../ActorCard/ActorCard'
 
 const TrailerPreview = ({ movieId }) => {
     const [movieDetails, setMovieDetails] = useState([])
@@ -46,19 +47,14 @@ const TrailerPreview = ({ movieId }) => {
                             </div>
                             <div className={styles.actors}>
                                 {castInfo.map(actor => (
-                                    <div className={styles.actorInfo} key={actor.id}>
-                                        <img className={styles.actorPhoto} src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} alt="" />
-                                        <p>
-                                            {actor.name}
-                                        </p>
-                                    </div>
+                                    <ActorCard key={actor.id} actor={actor} />
                                 ))}
                             </div>
                         </div>
                         {trailerUrl &&
 
                             <div className={styles.right}>
-                                <iframe className={styles.video} src={trailerUrl} allow='autoplay; encrypted-media' frameBorder="0" placeInline></iframe>
+                                { trailerUrl &&  <iframe className={styles.video} src={trailerUrl} allow='autoplay; encrypted-media' frameBorder="0" placeInline></iframe> }
                                 <div className={styles.overlay}></div>
                             </div>
                         }

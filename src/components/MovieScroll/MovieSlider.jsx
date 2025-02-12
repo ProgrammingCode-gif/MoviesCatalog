@@ -10,6 +10,7 @@ import Container from '../Container/Container';
 
 import { SlArrowRight, SlArrowLeft } from 'react-icons/sl';
 import TopRatedCard from '../TopRatedCard/TopRatedCard';
+import { Link } from 'react-router-dom';
 
 const MovieSlider = ({ movies, topRated }) => {
     const [isBeginning, setIsBeginning] = useState(true);
@@ -75,9 +76,11 @@ const MovieSlider = ({ movies, topRated }) => {
                         {movies?.map((movie, index) => (
                             <SwiperSlide key={movie.id} className={styles.movieItem}>
                                 {topRated ? (
-                                    <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
+                                        <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
                                 ) : (
-                                    <MovieCard posterPath={movie.poster_path} title={movie.title || movie.name} />
+                                    <Link to={`/movie/${movie.id}`}>
+                                        <MovieCard posterPath={movie.poster_path} title={movie.title || movie.name} />
+                                    </Link>
                                 )}
                             </SwiperSlide>
                         ))}
