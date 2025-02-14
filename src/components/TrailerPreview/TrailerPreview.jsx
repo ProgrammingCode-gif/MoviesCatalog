@@ -5,6 +5,7 @@ import utils from '../../utils/utils'
 
 import styles from './TrailerPreview.module.css'
 import ActorCard from '../ActorCard/ActorCard'
+import { Link } from 'react-router-dom'
 
 const TrailerPreview = ({ movieId }) => {
     const [movieDetails, setMovieDetails] = useState([])
@@ -50,6 +51,9 @@ const TrailerPreview = ({ movieId }) => {
                                     <ActorCard key={actor.id} actor={actor} />
                                 ))}
                             </div>
+                            <Link to={`/movie/${movieDetails.id}`}>
+                                <button>Подробнее</button>
+                            </Link>
                         </div>
                         {trailerUrl &&
 

@@ -102,6 +102,15 @@ class API {
             return []
         }
     }
+    async getRecomendations(movieId) {
+        try {
+            const response = await axios.get(`${BASE_URL}/movie/${movieId}/recommendations`, params)
+            return response.data.results
+        } catch (error) {
+            console.log(error);
+            return []
+        }
+    }
 }
 
 export default new API()
