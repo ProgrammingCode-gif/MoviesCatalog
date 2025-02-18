@@ -31,7 +31,7 @@ const MovieSwapperItem = ({ movie, activeMovie, movies, nextMovieIndex, setActiv
                             >
                                 {movie.overview}
                             </motion.p>
-                            <Link to={`/movie/${movie.id}`}>
+                            <Link to={`/movies/${movie.id}`}>
                                 <motion.button
                                     className={styles.currentMovieBtn}
                                     initial={{ opacity: 0, y: 30 }}

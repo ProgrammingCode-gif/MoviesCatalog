@@ -11,10 +11,10 @@ const MoviePageHeader = ({ movie, cast }) => {
                 <div className={styles.content}>
                     <div className={styles.left}>
                         <div className={styles.about}>
-                            <h2 className={styles.title}>{movie.title}</h2>
+                            <h2 className={styles.title}>{movie.title || movie.name}</h2>
                             <div className={styles.genres}>
                                 <p className={styles.overview}>{movie.overview}</p>
-                                <p className={styles.genres}>{movie.genres?.map(genre => `${genre.name} `)}</p>
+                                <p className={styles.genres}>{movie.genres?.map(genre => `${genre.name},  `)} {movie.release_date?.split('').slice(0, 4).join('')}</p>
                             </div>
                         </div>
 
@@ -30,7 +30,7 @@ const MoviePageHeader = ({ movie, cast }) => {
                     </div>
                 </div>
 
-                <p>В главных ролях:</p>
+                <p className={styles.actorsText}>В главных ролях:</p>
 
                 <div className={styles.bottom}>
                     {cast.map(actor => <ActorCard key={actor.id} actor={actor} />)}

@@ -4,7 +4,7 @@ import api from '../../services/api'
 import MoviePageHeader from '../../components/MoviePageHeader/MoviePageHeader'
 import MoviePageMain from '../../components/MoviePageMain/MoviePageMain'
 
-const MoviePage = () => {
+const MoviePage = ({series = false}) => {
     const { movieId } = useParams()
     const [movie, setMovie] = useState()
     const [cast, setCast] = useState()
@@ -14,8 +14,8 @@ const MoviePage = () => {
         const getMovie = async () => {
             try {
                 setLoading(true)
-                const data = await api.getMovieDetails(movieId)
-                const castData = await api.getCast(movieId)
+                const data = await api.getMovieDetails(movieId, series)
+                const castData = await api.getCast(movieId, series)
                 setMovie(data)
                 setCast(castData.slice(0, 5))
             } catch (error) {
@@ -34,7 +34,7 @@ const MoviePage = () => {
                 }
             </div>
             {
-                !loading && <MoviePageMain movie={movie}/>
+                !loading && <MoviePageMain movie={movie} isSeries={series}/>
             }
         </>
     )

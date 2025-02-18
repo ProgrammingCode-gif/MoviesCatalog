@@ -30,7 +30,7 @@ const PopularSeries = () => {
                 <h2 className={styles.seriesTitle}>Сериалы <IoIosArrowForward /></h2>
             </Container>
             {!loading && 
-                <MovieSlider movies={series}></MovieSlider>
+                <MovieSlider series={true} movies={series}></MovieSlider>
             }
         </section>
     )

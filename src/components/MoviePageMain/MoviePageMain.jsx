@@ -5,14 +5,15 @@ import utils from '../../utils/utils'
 import MovieSlider from '../MovieScroll/MovieSlider'
 import api from '../../services/api'
 
-const MoviePageMain = ({ movie }) => {
+const MoviePageMain = ({ movie, isSeries = false }) => {
     const [recomendations, setRecomendations] = useState(null)
     const [loading, setLoading] = useState(true)
+
     useEffect(() => {
         const getRecommendations = async () => {
             try {
                 setLoading(true)
-                const data = await api.getRecomendations(movie.id)
+                const data = await api.getRecomendations(movie.id, isSeries)
                 setRecomendations(data)
             } catch (error) {
                 console.log(error);
@@ -27,20 +28,20 @@ const MoviePageMain = ({ movie }) => {
             <Container>
                 <div className={styles.info}>
                     <div className={styles.infoItem}>
-                        <p className={styles.infoItemTitle}>Бюджет</p>
-                        <p className={styles.infoItemValue}>{utils.formatCurrency(movie.budget)}</p>
+                        <p className={styles.infoItemTitle}>{isSeries ? 'Сезонов' : 'Сборы'}</p>
+                        <p className={styles.infoItemValue}>{isSeries ? movie.number_of_seasons : utils.formatCurrency(movie.budget)}</p>
                     </div>
                     <div className={styles.infoItem}>
-                        <p className={styles.infoItemTitle}>Сборы</p>
-                        <p className={styles.infoItemValue}>{utils.formatCurrency(movie.revenue)}</p>
+                        <p className={styles.infoItemTitle}>{isSeries ? 'Эпизодов' : 'Сборы'}</p>
+                        <p className={styles.infoItemValue}>{isSeries ? movie.number_of_episodes : utils.formatCurrency(movie.revenue)}</p>
                     </div>
                     <div className={styles.infoItem}>
                         <p className={styles.infoItemTitle}>Статус</p>
-                        <p className={styles.infoItemValue}>{movie.status == 'Released' ? 'Выпущено' : ''}</p>
+                        <p className={styles.infoItemValue}>{movie.status == 'Released' ? 'Выпущено' : 'В разработке' || movie.status == 'Ended' ? 'Завершен' : 'Выпускается'}</p>
                     </div>
                     <div className={styles.infoItem}>
                         <p className={styles.infoItemTitle}>Исходное название</p>
-                        <p className={styles.infoItemValue}>{movie.original_title}</p>
+                        <p className={styles.infoItemValue}>{movie.original_title || movie.original_name}</p>
                     </div>
                 </div>
             </Container>
@@ -50,7 +51,7 @@ const MoviePageMain = ({ movie }) => {
                     </Container>
                     {
                         !loading &&
-                    <MovieSlider movies={recomendations} />
+                    <MovieSlider series={isSeries} movies={recomendations} />
                     }
                 </div>
         </main>

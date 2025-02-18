@@ -51,8 +51,8 @@ const TrailerPreview = ({ movieId }) => {
                                     <ActorCard key={actor.id} actor={actor} />
                                 ))}
                             </div>
-                            <Link to={`/movie/${movieDetails.id}`}>
-                                <button>Подробнее</button>
+                            <Link to={`/movies/${movieDetails.id}`}>
+                                <button className={styles.btn}>Подробнее</button>
                             </Link>
                         </div>
                         {trailerUrl &&

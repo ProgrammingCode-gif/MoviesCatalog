@@ -83,32 +83,51 @@ class API {
             return []
         }
     }
-    async getMovieDetails(movieId) {
+    async getMovieDetails(movieId, isSeries = false) {
         try {
-            const response = await axios.get(`${BASE_URL}/movie/${movieId}`, params)
-            // console.log(response.data);
+            const url = isSeries ? `${BASE_URL}/tv/${movieId}` : `${BASE_URL}/movie/${movieId}`
+            const response = await axios.get(url, params)
             return response.data
         } catch (error) {
             console.log(error);
             return []
         }
     }
-    async getCast(movieId) {
+
+    async getCast(movieId, isSeries = false) {
         try {
-            const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits`, params)
+            const url = isSeries ? `${BASE_URL}/tv/${movieId}/credits` : `${BASE_URL}/movie/${movieId}/credits`
+            const response = await axios.get(url, params)
             return response.data.cast
         } catch (error) {
             console.log(error);
             return []
         }
     }
-    async getRecomendations(movieId) {
+    async getRecomendations(movieId, isSeries = false) {
         try {
-            const response = await axios.get(`${BASE_URL}/movie/${movieId}/recommendations`, params)
+            const url = isSeries ? `${BASE_URL}/tv/${movieId}/recommendations` : `${BASE_URL}/movie/${movieId}/recommendations`
+            const response = await axios.get(url, params)
             return response.data.results
         } catch (error) {
             console.log(error);
             return []
+        }
+    }
+
+    async searchMovie(query) {
+        try {
+            const response = await axios.get(`${BASE_URL}/search/multi`, {
+                headers: params.headers,
+                params: {
+                    query: query,
+                    api_key: params.api_key,
+                    language: params.language
+                }
+            })
+            return response.data.results
+        } catch (error) {
+            console.log(error);
         }
     }
 }

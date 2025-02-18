@@ -12,7 +12,7 @@ import { SlArrowRight, SlArrowLeft } from 'react-icons/sl';
 import TopRatedCard from '../TopRatedCard/TopRatedCard';
 import { Link } from 'react-router-dom';
 
-const MovieSlider = ({ movies, topRated }) => {
+const MovieSlider = ({ movies, topRated, series = false }) => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
@@ -78,7 +78,7 @@ const MovieSlider = ({ movies, topRated }) => {
                                 {topRated ? (
                                         <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
                                 ) : (
-                                    <Link to={`/movie/${movie.id}`}>
+                                    <Link to={series ? `/series/${movie.id}` : `/movies/${movie.id}`}>
                                         <MovieCard posterPath={movie.poster_path} title={movie.title || movie.name} />
                                     </Link>
                                 )}
