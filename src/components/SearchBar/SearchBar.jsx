@@ -1,10 +1,11 @@
 import { FiSearch } from "react-icons/fi";
 import { FiFilter } from "react-icons/fi";
+import { AiOutlineClose } from "react-icons/ai";
 import styles from './SearchBar.module.css'
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
-const SearchBar = ({onResults}) => {
+const SearchBar = ({onResults, onFilter, isFiltering}) => {
     const [query, setQuery] = useState('')
     const [debouncedQuery, setDebouncedQuery] = useState("");
 
@@ -37,9 +38,13 @@ const SearchBar = ({onResults}) => {
 
     return (
         <div className={styles.searchBar}>
-            <FiFilter className={styles.icon} />
+            {
+                isFiltering 
+                    ? <AiOutlineClose className={styles.icon} onClick={() => onFilter(false)} /> 
+                    : <FiFilter className={styles.icon} onClick={() => onFilter(true)} />
+            }
             <input className={styles.input} onChange={(e) => setQuery(e.target.value)} placeholder='Поиск...' type="text" />
-            <FiSearch className={styles.icon} />
+            <FiSearch onClick={() => setDebouncedQuery(query)} className={styles.icon} />
         </div>
     )
 }

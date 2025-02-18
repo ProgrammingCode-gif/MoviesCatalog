@@ -27,6 +27,7 @@
 
 .title {
     width: max-content;
+    max-width: 60%;
     position: relative;
     font-family: Raleway;
     font-weight: 700;

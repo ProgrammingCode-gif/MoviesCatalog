@@ -120,12 +120,12 @@ class API {
             const response = await axios.get(`${BASE_URL}/search/multi`, {
                 headers: params.headers,
                 params: {
-                    query: query,
+                    query: encodeURIComponent(query),
                     api_key: params.api_key,
-                    language: params.language
+                    language: 'ru-RU'
                 }
             })
-            return response.data.results
+            return response.data.results.filter((movie) => movie.media_type != 'person')
         } catch (error) {
             console.log(error);
         }
