@@ -4,10 +4,13 @@ import { AiOutlineClose } from "react-icons/ai";
 import styles from './SearchBar.module.css'
 import { useEffect, useState } from "react";
 import api from "../../services/api";
+import { useParams, useSearchParams } from "react-router-dom";
 
 const SearchBar = ({onResults, onFilter, isFiltering}) => {
     const [query, setQuery] = useState('')
     const [debouncedQuery, setDebouncedQuery] = useState("");
+    const [searchParams] = useSearchParams()
+
 
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -24,7 +27,8 @@ const SearchBar = ({onResults, onFilter, isFiltering}) => {
         const fetchMovies = async () => {
             try {
                 console.log(debouncedQuery);
-                const data = await api.searchMovie(debouncedQuery)
+                const data = await api.searchMovie(debouncedQuery, searchParams)
+                console.log(searchParams);
                 console.log(data);
                 onResults(data || [])
             } catch (error) {
@@ -34,7 +38,7 @@ const SearchBar = ({onResults, onFilter, isFiltering}) => {
 
         fetchMovies()
 
-    }, [debouncedQuery])
+    }, [debouncedQuery, searchParams])
 
     return (
         <div className={styles.searchBar}>

@@ -115,7 +115,7 @@ class API {
         }
     }
 
-    async searchMovie(query) {
+    async searchMovie(query, filterParams) {
         try {
             const response = await axios.get(`${BASE_URL}/search/multi`, {
                 headers: params.headers,
@@ -125,7 +125,27 @@ class API {
                     language: 'ru-RU'
                 }
             })
-            return response.data.results.filter((movie) => movie.media_type != 'person')
+            const moviesAndSeries = response.data.results.filter((movie) => movie.media_type != 'person')
+            let sortedData = []
+
+            if(filterParams.get("sortType") == 'alphabet') {
+                sortedData = moviesAndSeries.sort((a, b) => {
+                    const nameA = (a.title || a.name || "").toLowerCase();
+                    const nameB = (b.title || b.name || "").toLowerCase();
+                    return nameA.localeCompare(nameB);
+                })
+            } else if(filterParams.get("sortType") == 'date') {
+                sortedData = moviesAndSeries.sort((a, b) => {
+                    const dateA = new Date(a.release_date || a.first_air_date)
+                    const dateB = new Date(b.release_date || b.first_air_date)
+                    return dateB - dateA
+                })
+            } else if(filterParams.get("sortType") == 'popular') {
+                sortedData = moviesAndSeries.sort((a, b) => b.popularity - a.popularity)
+            } else {
+                sortedData = moviesAndSeries
+            }
+            return sortedData
         } catch (error) {
             console.log(error);
         }

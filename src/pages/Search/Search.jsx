@@ -12,7 +12,7 @@ const Search = () => {
         <div>
             <Container>
                 <SearchBar isFiltering={isFiltering} onFilter={setIsFiltering} onResults={setResults}/>
-                    <SearchFilter isFiltering={isFiltering} />
+                <SearchFilter isFiltering={isFiltering} />
                 <MovieList movies={results} />
             </Container>
         </div>
