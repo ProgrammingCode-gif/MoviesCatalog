@@ -130,6 +130,16 @@ class API {
             console.log(error);
         }
     }
+
+    async getMoviesGenres() {
+        try {
+            const response = await axios.get(`${BASE_URL}/genre/movie/list`, params)
+            return response.data.genres
+        } catch (error) {
+            console.log(error);
+            return []
+        }
+    }
 }
 
 export default new API()

@@ -1,0 +1,33 @@
+.filter {
+    margin-top: 80px;
+    max-height: 0;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    transition: max-height 400ms;
+}
+
+.filterSection {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.filterActive {
+    max-height: 500px;
+}
+
+.sectionName {
+    color: rgba(255, 255, 255, 0.363);
+    font-size: 25px;
+    font-weight: 250;
+}
+
+.sectionOptions {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    row-gap: 0;
+}
+

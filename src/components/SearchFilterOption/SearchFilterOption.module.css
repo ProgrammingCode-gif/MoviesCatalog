@@ -1,0 +1,14 @@
+.sectionOption {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #000;
+    border-radius: 20px;
+    transition: background 300ms;
+    cursor: pointer;
+    color: white;
+}
+
+.optionActive {
+    background: #8e8e8e29;
+}
+
