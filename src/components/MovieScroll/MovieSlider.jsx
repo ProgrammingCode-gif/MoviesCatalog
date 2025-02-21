@@ -50,7 +50,7 @@ const MovieSlider = ({ movies, topRated, series = false }) => {
 
     return (
         <div className={styles.movieSlider}>
-                <Container>
+                <Container className={styles.sliderContainer}>
                     <Swiper
                         ref={swiperRef}
                         slidesPerView={'auto'}
@@ -78,7 +78,7 @@ const MovieSlider = ({ movies, topRated, series = false }) => {
                                 {topRated ? (
                                         <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
                                 ) : (
-                                    <Link to={series ? `/series/${movie.id}` : `/movies/${movie.id}`}>
+                                    <Link className={styles.cardLink} to={series ? `/series/${movie.id}` : `/movies/${movie.id}`}>
                                         <MovieCard posterPath={movie.poster_path} title={movie.title || movie.name} />
                                     </Link>
                                 )}

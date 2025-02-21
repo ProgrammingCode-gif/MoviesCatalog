@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './MovieCard.module.css'
 
-const MovieCard = ({ title, posterPath}) => {
+const MovieCard = ({ title, posterPath, width}) => {
     return (
         <div className={styles.movieCard}>
             <img className={styles.movieCardImg} src={`https://image.tmdb.org/t/p/w500${posterPath}`} alt="" />

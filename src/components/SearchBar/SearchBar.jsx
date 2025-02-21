@@ -5,8 +5,9 @@ import styles from './SearchBar.module.css'
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useParams, useSearchParams } from "react-router-dom";
+import utils from "../../utils/utils";
 
-const SearchBar = ({onResults, onFilter, isFiltering}) => {
+const SearchBar = ({onResults, onFilter, isFiltering, results}) => {
     const [query, setQuery] = useState('')
     const [debouncedQuery, setDebouncedQuery] = useState("");
     const [searchParams] = useSearchParams()
@@ -26,11 +27,9 @@ const SearchBar = ({onResults, onFilter, isFiltering}) => {
 
         const fetchMovies = async () => {
             try {
-                console.log(debouncedQuery);
-                const data = await api.searchMovie(debouncedQuery, searchParams)
-                console.log(searchParams);
-                console.log(data);
-                onResults(data || [])
+                const data = await api.searchMovie(debouncedQuery)
+                const sortedData = utils.sortMovies(data, searchParams)
+                onResults(sortedData || [])
             } catch (error) {
                 console.log(error);
             }

@@ -27,8 +27,8 @@ const SearchFilter = ({isFiltering}) => {
             <div className={styles.filterSection}>
                 <p className={styles.sectionName}>Категории</p>
                 <div className={styles.sectionOptions}>
-                <SearchFilterOption title='Фильмы' query='category' value='movies' />
-                <SearchFilterOption title='Сериалы' query='category' value='series' />
+                <SearchFilterOption title='Фильмы' query='category' value='movie' />
+                <SearchFilterOption title='Сериалы' query='category' value='tv' />
                 </div>
             </div>
             <div className={styles.filterSection}>

@@ -3,6 +3,8 @@
   overflow: hidden;
   width: 100vw;
   height: 330px;
+  display: flex;
+  align-items: center;
 }
 
 .swiper {
@@ -11,16 +13,23 @@
   width: 100%;
   height: 330px;
   overflow: visible !important;
+  margin-bottom: 20px;
+}
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
 }
 
 .swiperSlide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   font-size: 18px;
   background: transparent;
   width: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
 }
 
 .movieItem {
@@ -70,4 +79,9 @@
 .buttonNext {
   right: 0;
   background: linear-gradient(to left, #141414, transparent);
+}
+
+.cardLink {
+  width: 200px;
+  height: 300px;
 }
