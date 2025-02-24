@@ -2,9 +2,7 @@
     position: relative;
     width: 100%;
     height: 100vh;
-    /* background: #141414C2; */
     background: linear-gradient(180deg, #1414143e 1%, #141414 99%);
-    /* background: linear-gradient(180deg, transparent 1%, #141414 99%); */
 }
 
 .currentMovieAbout {

@@ -1,8 +1,6 @@
 .movieList {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
-    justify-content: center;
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; 
+    justify-content: start;
 }

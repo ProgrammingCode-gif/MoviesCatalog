@@ -1,6 +1,11 @@
 .movieCard {
+    flex: 1 1 calc(16.66% - 15px); /* 6 карточек в ряду с фиксированным gap */
+    max-width: 300px; /* Ограничиваем максимальный размер карточки */
+    aspect-ratio: 2 / 3;
+
+    
     display: flex;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px;
     width: 200px;
     height: 300px;
