@@ -3,7 +3,6 @@ import styles from './SearchFilterOption.module.css'
 import { useSearchParams } from 'react-router-dom'
 
 const SearchFilterOption = ({title, query, value}) => {
-    // const [filterQuery, setFilterQuery] = useState()
     const [filterParams, setFilterParams] = useSearchParams()
     const [isSelected, setIsSelected] = useState()
 
@@ -18,7 +17,7 @@ const SearchFilterOption = ({title, query, value}) => {
             params.set(param, value)
             setIsSelected(true)
         }
-
+        
         setFilterParams(params)
     }
 

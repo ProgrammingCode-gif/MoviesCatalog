@@ -32,7 +32,7 @@ class Utils {
                 return dateB - dateA
             })
         } else if(sortType == 'popular') {
-            sortedData = moviesAndSeries.sort((a, b) => b.popularity - a.popularity)
+            sortedData = moviesAndSeries.sort((a, b) => b.vote_average - a.vote_average && b.popularity - a.popularity )
         } else {
             sortedData = moviesAndSeries
         }

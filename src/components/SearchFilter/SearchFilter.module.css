@@ -9,12 +9,16 @@
 
 .filterSection {
     width: 30%;
+    height: 250px;
     display: flex;
     flex-direction: column;
+    overflow: visible;
 }
 
 .filterActive {
-    max-height: 500px;
+    max-height: 300px;
+    width: 100%;
+    /* overflow: visible; */
 }
 
 .sectionName {
@@ -31,3 +35,6 @@
     row-gap: 0;
 }
 
+.sectionOptions {
+    margin-top: 20px;
+}

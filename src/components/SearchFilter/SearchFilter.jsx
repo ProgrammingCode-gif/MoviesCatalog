@@ -3,8 +3,9 @@ import styles from './SearchFilter.module.css'
 import api from '../../services/api'
 import { Link, useSearchParams } from 'react-router-dom'
 import SearchFilterOption from '../SearchFilterOption/SearchFilterOption'
+import SearchFilterSelector from '../SearchFilterSelector/SearchFilterSelector'
 
-const SearchFilter = ({isFiltering}) => {
+const SearchFilter = ({ isFiltering }) => {
     const [genres, setGenres] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -23,19 +24,18 @@ const SearchFilter = ({isFiltering}) => {
     }, [])
 
     return (
-        <div className={isFiltering ? `${styles.filter} ${styles.filterActive}` : styles.filter }>
+        <div className={isFiltering ? `${styles.filter} ${styles.filterActive}` : styles.filter}>
             <div className={styles.filterSection}>
                 <p className={styles.sectionName}>Категории</p>
                 <div className={styles.sectionOptions}>
-                <SearchFilterOption title='Фильмы' query='category' value='movie' />
-                <SearchFilterOption title='Сериалы' query='category' value='tv' />
+                    <SearchFilterOption title='Фильмы' query='category' value='movie' />
+                    <SearchFilterOption title='Сериалы' query='category' value='tv' />
                 </div>
             </div>
             <div className={styles.filterSection}>
                 <p className={styles.sectionName}>Жанр</p>
                 <div className={styles.sectionOptions}>
-
-                    {!loading && genres.map((genre) => <SearchFilterOption key={genre.id} title={genre.name} query='genre' value={genre.id} />)}
+                    {!loading ? <SearchFilterSelector options={genres} /> : ''}
                 </div>
             </div>
             <div className={styles.filterSection}>
