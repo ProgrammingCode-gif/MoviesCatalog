@@ -34,12 +34,22 @@ class Utils {
                 return dateB - dateA
             })
         } else if(sortType == 'popular') {
-            sortedData = sortedData.sort((a, b) => b.vote_average - a.vote_average)
+            const minVoutes = 500; // Минимальное количество голосов для учета
+            const avgScore = sortedData.reduce((sum, movie) => sum + movie.vote_average, 0) / sortedData.length; // Средняя оценка всех фильмов
+        
+            sortedData = sortedData
+                .map(movie => {
+                    const voteCount = movie.vote_count;
+                    const voteAvg = movie.vote_average;
+        
+                    const weightedRating = (voteCount / (voteCount + minVoutes)) * voteAvg + (minVoutes / (voteCount + minVoutes)) * avgScore;
+                    
+                    return { ...movie, weightedRating };
+                })
+                .sort((a, b) => b.weightedRating - a.weightedRating);
         } else {
             sortedData = sortedData
         }
-
-        console.log(sortedData);
 
         if(genre) {
             sortedData = sortedData.filter((el) => el.genre_ids.includes(+genre))

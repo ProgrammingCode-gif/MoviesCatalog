@@ -1,0 +1,15 @@
+.searchRecomendations {
+    margin-top: 60px;
+}
+
+.title {
+    font-family: Raleway;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 28px;
+    cursor: pointer; 
+    color: white;
+}

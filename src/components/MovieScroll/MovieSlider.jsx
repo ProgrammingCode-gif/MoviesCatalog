@@ -78,7 +78,7 @@ const MovieSlider = ({ movies, topRated, series = false }) => {
                                 {topRated ? (
                                         <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
                                 ) : (
-                                    <Link className={styles.cardLink} to={series ? `/series/${movie.id}` : `/movies/${movie.id}`}>
+                                    <Link className={styles.cardLink} to={movie.media_type == 'tv' || series ? `/series/${movie.id}` : `/movies/${movie.id}`}>
                                         <MovieCard posterPath={movie.poster_path} title={movie.title || movie.name} />
                                     </Link>
                                 )}

@@ -51,11 +51,9 @@ class API {
                     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNWY4MGNhMjVjYWExNzgwMzUzNzE1MmJiNjRmZGZmNiIsIm5iZiI6MTY4NjM4OTEyMi43OTEwMDAxLCJzdWIiOiI2NDg0NDE4MmUzNzVjMDAxMWM3ZmFmOWMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4UgPR15RWS_DO8W9VLFZJjTKGe6Stu0Dc9JWFKKX5RM'
                 }
             });
-            console.log(response);
             const trailer = response.data.results.find(
                 (video) => video.type === 'Trailer' && video.site === 'YouTube'
             );
-            console.log(trailer);
 
             return trailer ? `https://www.youtube.com/embed/${trailer.key}?autoplay=1&loop=1&controls=0&mute=1&playlist=${trailer.key}` : null;
         } catch (error) {
@@ -83,6 +81,17 @@ class API {
             return []
         }
     }
+
+    async getTrendingMoviesAndSeries() {
+        try {
+            const response = await axios.get(`${BASE_URL}/trending/all/week`, params)
+            return response.data.results.filter((movie) => movie.media_type != 'person')
+        } catch (error) {
+            console.log(error);
+            return []
+        }
+    }
+
     async getMovieDetails(movieId, isSeries = false) {
         try {
             const url = isSeries ? `${BASE_URL}/tv/${movieId}` : `${BASE_URL}/movie/${movieId}`

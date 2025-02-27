@@ -29,11 +29,11 @@ const MoviePageMain = ({ movie, isSeries = false }) => {
                 <div className={styles.info}>
                     <div className={styles.infoItem}>
                         <p className={styles.infoItemTitle}>{isSeries ? 'Сезонов' : 'Сборы'}</p>
-                        <p className={styles.infoItemValue}>{isSeries ? movie.number_of_seasons : utils.formatCurrency(movie.budget)}</p>
+                        <p className={styles.infoItemValue}>{isSeries ? movie.number_of_seasons : (movie.budget != 0 ? utils.formatCurrency(movie.budget) : "Неизвестно")}</p>
                     </div>
                     <div className={styles.infoItem}>
                         <p className={styles.infoItemTitle}>{isSeries ? 'Эпизодов' : 'Сборы'}</p>
-                        <p className={styles.infoItemValue}>{isSeries ? movie.number_of_episodes : utils.formatCurrency(movie.revenue)}</p>
+                        <p className={styles.infoItemValue}>{isSeries ? movie.number_of_episodes : (movie.revenue != 0 ? utils.formatCurrency(movie.revenue) : "Неизвестно")}</p>
                     </div>
                     <div className={styles.infoItem}>
                         <p className={styles.infoItemTitle}>Статус</p>

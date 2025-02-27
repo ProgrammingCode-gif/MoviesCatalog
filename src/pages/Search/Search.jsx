@@ -4,6 +4,10 @@ import SearchBar from '../../components/SearchBar/SearchBar'
 import MovieList from '../../components/MovieList/MovieList'
 import SearchFilter from '../../components/SearchFilter/SearchFilter'
 
+import styles from './Search.module.css'
+import PopularSeries from '../../components/PopularSeries/PopularSeries'
+import SearchRecomendations from '../../components/SearchRecomendations/SearchRecomendations'
+
 const Search = () => {
     const [results, setResults] = useState([])
     const [isFiltering, setIsFiltering] = useState(false)
@@ -11,9 +15,11 @@ const Search = () => {
         <div>
             <Container>
                 <SearchBar results={results} isFiltering={isFiltering} onFilter={setIsFiltering} onResults={setResults}/>
+                {results.length == 0 && <div className={styles.emptySearchTitle}>Поиск фильмов и сериалов</div>}
                 <SearchFilter isFiltering={isFiltering} />
-                <MovieList movies={results} />
+                <MovieList movies={results} /> 
             </Container>
+            <SearchRecomendations />
         </div>
     )
 }

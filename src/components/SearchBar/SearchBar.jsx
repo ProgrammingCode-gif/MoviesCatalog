@@ -23,7 +23,10 @@ const SearchBar = ({onResults, onFilter, isFiltering, results}) => {
 
     useEffect(() => {
         
-        if(!debouncedQuery.trim()) return
+        if(!debouncedQuery.trim()) {
+            onResults([])
+            return
+        }
 
         const fetchMovies = async () => {
             try {
