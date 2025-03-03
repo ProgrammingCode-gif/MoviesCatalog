@@ -20,7 +20,7 @@ class API {
         }
     }
 
-    async getTrendingSeries(page) {
+    async getTrendingSeries(page = 1) {
         try {
             const response = await axios.get(`${BASE_URL}/trending/tv/week?language=ru-RU&page=${page}`, params)
             return response.data.results
@@ -43,7 +43,7 @@ class API {
         }
     }
 
-    async getTopTenRatedMovies(page) {
+    async getTopTenRatedMovies(page = 1) {
         try {
             const response = await axios.get(`${BASE_URL}/movie/top_rated?language=ru-RU`, {...params, params: { ...params.params, page: page || 1 }})
             return response.data.results.slice(0, 10)
@@ -53,7 +53,7 @@ class API {
         }
     }
 
-    async getTrendingMovies(page) {
+    async getTrendingMovies(page = 1) {
         try {
             const response = await axios.get(`${BASE_URL}/trending/movie/week?language=ru-RU`, {...params, params: { ...params.params, page: page || 1 }})
             return response.data.results.slice(0, 8)
@@ -63,7 +63,7 @@ class API {
         }
     }
 
-    async getTrendingMoviesAndSeries(page) {
+    async getTrendingMoviesAndSeries(page = 1) {
         try {
             const response = await axios.get(`${BASE_URL}/trending/all/week?language=ru-RU`, {...params, params: { ...params.params, page: page || 1 }})
             return response.data.results.filter((movie) => movie.media_type != 'person')

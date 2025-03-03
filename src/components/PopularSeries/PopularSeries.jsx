@@ -13,7 +13,7 @@ const PopularSeries = () => {
     useEffect(() => {
         const getSeries = async () => {
             try {
-                const data = await api.getTopRatedSeries()
+                const data = await api.getTrendingSeries()
                 setSeries(data)
             } catch (error) {
                 console.log(error);
