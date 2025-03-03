@@ -62,6 +62,14 @@ class Utils {
 
         return sortedData
     }
+
+    firtsLetterToUpper(text) {
+        const textArr = text.split('')
+        textArr[0] = textArr[0].toUpperCase()
+        textArr.join('')
+
+        return textArr
+    }
 }
 
 export default new Utils()

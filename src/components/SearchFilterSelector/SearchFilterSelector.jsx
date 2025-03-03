@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './SearchFilterSelector.module.css'
 import { FiChevronDown } from "react-icons/fi";
 import { useSearchParams } from 'react-router-dom';
+import utils from '../../utils/utils';
 
 const SearchFilterSelector = ({options}) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -25,14 +26,14 @@ const SearchFilterSelector = ({options}) => {
     const handleFilter = (param, value) => {
         const params = new URLSearchParams(filterParams)
 
-        if(params.has(param, value)) {
-            params.delete(param)
-            setSelected({name: 'Не выбрано'})
-            setFilterSelected(false)
-        } else {
+        // if(params.has(param, value)) {
+        //     params.delete(param)
+        //     setSelected({name: 'Не выбрано'})
+        //     setFilterSelected(false)
+        // } else {
             params.set(param, value)
             setFilterSelected(true)
-        }
+        // }
         
         setFilterParams(params)
     }
@@ -40,7 +41,7 @@ const SearchFilterSelector = ({options}) => {
     return (
         <div className={isOpen ? `${styles.selectContainerActive} ${styles.selectContainer}` :  styles.selectContainer} onClick={() => setIsOpen(!isOpen)}>
             <div className={styles.selected}>
-                {selected?.name}
+                {utils.firtsLetterToUpper(selected?.name)}
                 <FiChevronDown className={styles.icon} />
             </div>
             {isOpen && (
@@ -62,7 +63,7 @@ const SearchFilterSelector = ({options}) => {
                                 handleFilter('genre', option.id)
                             }}
                         >
-                            {option.name}
+                            {utils.firtsLetterToUpper(option.name)}
                         </li>
                     ))}
                 </ul>

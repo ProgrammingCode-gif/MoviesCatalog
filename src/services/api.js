@@ -4,19 +4,15 @@ const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNWY4MGNhMjVjYWExNzgwMzUzNzE1Mm
 const BASE_URL = 'https://api.themoviedb.org/3'
 
 const params = {
-    params: {
-        api_key: API_KEY,
-        language: 'ru-RU',
-    },
     headers: {
         Authorization: `Bearer ${API_KEY}`
     }
 }
 
 class API {
-    async getPopularMovies() {
+    async getPopularMovies(page = 1) {
         try {
-            const response = await axios.get(`${BASE_URL}/movie/popular`, params)
+            const response = await axios.get(`${BASE_URL}/trending/movie/week?page=${page}&language=ru-RU`, params)
             return response.data.results
         } catch (error) {
             console.log('Ошибка при получении популярных фильмов:', error);
@@ -24,16 +20,9 @@ class API {
         }
     }
 
-    async getTopRatedSeries() {
+    async getTrendingSeries(page) {
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/tv/top_rated?language=ru-RU&page=1`, {
-                params: {
-                    language: 'ru-RU'
-                },
-                headers: {
-                    Authorization: `Bearer ${API_KEY}`
-                }
-            })
+            const response = await axios.get(`${BASE_URL}/trending/tv/week?language=ru-RU&page=${page}`, params)
             return response.data.results
         } catch (error) {
             console.log('Ошибка при получении сериалов:', error)
@@ -42,15 +31,7 @@ class API {
     }
     async getMovieTrailerUrl(movieId) {
         try {
-            const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos?&language=en-US`, {
-                params: {
-                    api_key: API_KEY,
-                    language: 'en-EN',
-                },
-                headers: {
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNWY4MGNhMjVjYWExNzgwMzUzNzE1MmJiNjRmZGZmNiIsIm5iZiI6MTY4NjM4OTEyMi43OTEwMDAxLCJzdWIiOiI2NDg0NDE4MmUzNzVjMDAxMWM3ZmFmOWMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4UgPR15RWS_DO8W9VLFZJjTKGe6Stu0Dc9JWFKKX5RM'
-                }
-            });
+            const response = await axios.get(`${BASE_URL}/movie/${movieId}/videos?language=ru-RU`, params);
             const trailer = response.data.results.find(
                 (video) => video.type === 'Trailer' && video.site === 'YouTube'
             );
@@ -62,9 +43,9 @@ class API {
         }
     }
 
-    async getTopTenRatedMovies() {
+    async getTopTenRatedMovies(page) {
         try {
-            const response = await axios.get(`${BASE_URL}/movie/top_rated`, params)
+            const response = await axios.get(`${BASE_URL}/movie/top_rated?language=ru-RU`, {...params, params: { ...params.params, page: page || 1 }})
             return response.data.results.slice(0, 10)
         } catch (error) {
             console.log(error);
@@ -72,9 +53,9 @@ class API {
         }
     }
 
-    async getTrendingMovies() {
+    async getTrendingMovies(page) {
         try {
-            const response = await axios.get(`${BASE_URL}/trending/movie/week`, params)
+            const response = await axios.get(`${BASE_URL}/trending/movie/week?language=ru-RU`, {...params, params: { ...params.params, page: page || 1 }})
             return response.data.results.slice(0, 8)
         } catch (error) {
             console.log(error);
@@ -82,9 +63,9 @@ class API {
         }
     }
 
-    async getTrendingMoviesAndSeries() {
+    async getTrendingMoviesAndSeries(page) {
         try {
-            const response = await axios.get(`${BASE_URL}/trending/all/week`, params)
+            const response = await axios.get(`${BASE_URL}/trending/all/week?language=ru-RU`, {...params, params: { ...params.params, page: page || 1 }})
             return response.data.results.filter((movie) => movie.media_type != 'person')
         } catch (error) {
             console.log(error);
@@ -94,7 +75,7 @@ class API {
 
     async getMovieDetails(movieId, isSeries = false) {
         try {
-            const url = isSeries ? `${BASE_URL}/tv/${movieId}` : `${BASE_URL}/movie/${movieId}`
+            const url = isSeries ? `${BASE_URL}/tv/${movieId}?language=ru-RU` : `${BASE_URL}/movie/${movieId}?language=ru-RU`
             const response = await axios.get(url, params)
             return response.data
         } catch (error) {
@@ -105,7 +86,7 @@ class API {
 
     async getCast(movieId, isSeries = false) {
         try {
-            const url = isSeries ? `${BASE_URL}/tv/${movieId}/credits` : `${BASE_URL}/movie/${movieId}/credits`
+            const url = isSeries ? `${BASE_URL}/tv/${movieId}/credits?language=ru-RU` : `${BASE_URL}/movie/${movieId}/credits?language=ru-RU`
             const response = await axios.get(url, params)
             return response.data.cast
         } catch (error) {
@@ -115,7 +96,7 @@ class API {
     }
     async getRecomendations(movieId, isSeries = false) {
         try {
-            const url = isSeries ? `${BASE_URL}/tv/${movieId}/recommendations` : `${BASE_URL}/movie/${movieId}/recommendations`
+            const url = isSeries ? `${BASE_URL}/tv/${movieId}/recommendations?language=ru-RU` : `${BASE_URL}/movie/${movieId}/recommendations?language=ru-RU`
             const response = await axios.get(url, params)
             return response.data.results
         } catch (error) {
@@ -126,7 +107,7 @@ class API {
 
     async searchMovie(query) {
         try {
-            const response = await axios.get(`${BASE_URL}/search/multi`, {
+            const response = await axios.get(`${BASE_URL}/search/multi?language=ru-RU`, {
                 headers: params.headers,
                 params: {
                     query: encodeURIComponent(query),
@@ -143,7 +124,7 @@ class API {
 
     async getMoviesGenres() {
         try {
-            const response = await axios.get(`${BASE_URL}/genre/movie/list`, params)
+            const response = await axios.get(`${BASE_URL}/genre/movie/list?language=ru-RU`, params)
             return response.data.genres
         } catch (error) {
             console.log(error);

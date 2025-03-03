@@ -15,10 +15,11 @@ const Search = () => {
         <div>
             <Container>
                 <SearchBar results={results} isFiltering={isFiltering} onFilter={setIsFiltering} onResults={setResults}/>
-                {results.length == 0 && <div className={styles.emptySearchTitle}>Поиск фильмов и сериалов</div>}
                 <SearchFilter isFiltering={isFiltering} />
+                {results.length == 0 && <div className={styles.emptySearchTitle}>Поиск фильмов и сериалов</div>}
                 <MovieList movies={results} /> 
             </Container>
+
             <SearchRecomendations />
         </div>
     )

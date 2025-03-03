@@ -62,7 +62,7 @@
 }
 
 .dropdown::-webkit-scrollbar-thumb {
-    background: #ff9900;
+    background: linear-gradient(180deg, rgba(30,112,154,1) 9%, rgba(76,131,111,1) 100%);
 }
 
 .dropdown::-webkit-scrollbar-track {
