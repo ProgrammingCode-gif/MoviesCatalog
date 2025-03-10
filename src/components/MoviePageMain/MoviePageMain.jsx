@@ -50,7 +50,7 @@ const MoviePageMain = ({ movie, isSeries = false }) => {
                         <p className={styles.recomendationsText}>Рекомендации</p>
                     </Container>
                     {
-                        !loading &&
+                        !loading && recomendations.length != 0 &&
                     <MovieSlider series={isSeries} movies={recomendations} />
                     }
                 </div>

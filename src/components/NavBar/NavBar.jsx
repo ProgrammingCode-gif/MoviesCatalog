@@ -14,7 +14,7 @@ const NavBar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50); // Если прокрутили вниз на 50px — меняем цвет
+            setScrolled(window.scrollY > 50);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -38,6 +38,9 @@ const NavBar = () => {
                     </li>
                     <li>
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/movies"><MdOutlineMovie className={styles.linkIcon} />Фильмы</NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/genres"><MdOutlineMovie className={styles.linkIcon} />Жанры</NavLink>
                     </li>
                     <li>
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/search"><FiSearch className={`${styles.linkIcon} ${styles.searchIcon}`} /></NavLink>

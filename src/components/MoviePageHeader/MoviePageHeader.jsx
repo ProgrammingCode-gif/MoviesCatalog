@@ -14,7 +14,7 @@ const MoviePageHeader = ({ movie, cast }) => {
                             <h2 className={styles.title}>{movie.title || movie.name}</h2>
                             <div className={styles.genres}>
                                 <p className={styles.overview}>{movie.overview}</p>
-                                <p className={styles.genres}>{movie.genres?.map(genre => `${genre.name},  `)} {movie.release_date?.split('').slice(0, 4).join('')}</p>
+                                <p className={styles.genres}>{movie.genres?.map(genre => `${genre.name},  `)} {movie.release_date?.split('').slice(0, 4).join('') || movie.first_air_date?.split('').slice(0, 4).join('')}</p>
                             </div>
                         </div>
 

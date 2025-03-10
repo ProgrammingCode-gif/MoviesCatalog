@@ -12,8 +12,14 @@ const params = {
 class API {
     async getPopularMovies(page = 1) {
         try {
-            const response = await axios.get(`${BASE_URL}/trending/movie/week?page=${page}&language=ru-RU`, params)
-            return response.data.results
+            const response = await axios.get(`${BASE_URL}/trending/movie/week?page=${page}&language=ru-RU&include_adults=false`, params)
+            return response.data.results.filter(movie => 
+                !movie.adult &&
+                movie.original_language !== "hi" &&
+                movie.original_language !== "ta" &&
+                movie.original_language !== "te" &&
+                movie.original_language !== "ml"
+            )
         } catch (error) {
             console.log('Ошибка при получении популярных фильмов:', error);
             return []
@@ -22,8 +28,14 @@ class API {
 
     async getTrendingSeries(page = 1) {
         try {
-            const response = await axios.get(`${BASE_URL}/trending/tv/week?language=ru-RU&page=${page}`, params)
-            return response.data.results
+            const response = await axios.get(`${BASE_URL}/trending/tv/week?language=ru-RU&page=${page}&include_adults=false`, params)
+            return response.data.results.filter(movie => 
+                !movie.adult &&
+                movie.original_language !== "hi" &&
+                movie.original_language !== "ta" &&
+                movie.original_language !== "te" &&
+                movie.original_language !== "ml"
+            )
         } catch (error) {
             console.log('Ошибка при получении сериалов:', error)
             return []
@@ -45,8 +57,14 @@ class API {
 
     async getTopTenRatedMovies(page = 1) {
         try {
-            const response = await axios.get(`${BASE_URL}/movie/top_rated?language=ru-RU`, {...params, params: { ...params.params, page: page || 1 }})
-            return response.data.results.slice(0, 10)
+            const response = await axios.get(`${BASE_URL}/movie/top_rated?language=ru-RU&include_adults=false`, { ...params, params: { ...params.params, page: page || 1 } })
+            return response.data.results.filter(movie => 
+                !movie.adult &&
+                movie.original_language !== "hi" &&
+                movie.original_language !== "ta" &&
+                movie.original_language !== "te" &&
+                movie.original_language !== "ml"
+            ).slice(0, 10)
         } catch (error) {
             console.log(error);
             return []
@@ -55,8 +73,14 @@ class API {
 
     async getTrendingMovies(page = 1) {
         try {
-            const response = await axios.get(`${BASE_URL}/trending/movie/week?language=ru-RU`, {...params, params: { ...params.params, page: page || 1 }})
-            return response.data.results.slice(0, 8)
+            const response = await axios.get(`${BASE_URL}/trending/movie/week?language=ru-RU&include_adults=false`, { ...params, params: { ...params.params, page: page || 1 } })
+            return response.data.results.filter(movie => 
+                !movie.adult &&
+                movie.original_language !== "hi" &&
+                movie.original_language !== "ta" &&
+                movie.original_language !== "te" &&
+                movie.original_language !== "ml"
+            ).slice(0, 8)
         } catch (error) {
             console.log(error);
             return []
@@ -65,8 +89,13 @@ class API {
 
     async getTrendingMoviesAndSeries(page = 1) {
         try {
-            const response = await axios.get(`${BASE_URL}/trending/all/week?language=ru-RU`, {...params, params: { ...params.params, page: page || 1 }})
-            return response.data.results.filter((movie) => movie.media_type != 'person')
+            const response = await axios.get(`${BASE_URL}/trending/all/week?language=ru-RU&include_adults=false`, { ...params, params: { ...params.params, page: page || 1 } })
+            return response.data.results.filter((movie) => 
+                movie.media_type != 'person' && !movie.adult &&
+                movie.original_language !== "hi" &&
+                movie.original_language !== "ta" &&
+                movie.original_language !== "te" &&
+                movie.original_language !== "ml")
         } catch (error) {
             console.log(error);
             return []
@@ -96,9 +125,15 @@ class API {
     }
     async getRecomendations(movieId, isSeries = false) {
         try {
-            const url = isSeries ? `${BASE_URL}/tv/${movieId}/recommendations?language=ru-RU` : `${BASE_URL}/movie/${movieId}/recommendations?language=ru-RU`
+            const url = isSeries ? `${BASE_URL}/tv/${movieId}/recommendations?language=ru-RU&include_adults=false` : `${BASE_URL}/movie/${movieId}/recommendations?language=ru-RU&include_adults=false`
             const response = await axios.get(url, params)
-            return response.data.results
+            return response.data.results.filter(movie =>
+                !movie.adult &&
+                movie.original_language !== "hi" &&
+                movie.original_language !== "ta" &&
+                movie.original_language !== "te" &&
+                movie.original_language !== "ml"
+            );
         } catch (error) {
             console.log(error);
             return []
@@ -116,7 +151,13 @@ class API {
                 }
             })
             const moviesAndSeries = response.data.results.filter((movie) => movie.media_type != 'person')
-            return moviesAndSeries
+            return moviesAndSeries.filter(movie =>
+                !movie.adult &&
+                movie.original_language !== "hi" &&
+                movie.original_language !== "ta" &&
+                movie.original_language !== "te" && 
+                movie.original_language !== "ml"
+            );
         } catch (error) {
             console.log(error);
         }

@@ -6,7 +6,7 @@ const SwapperNextLoading = ({nextMovie}) => {
         <div className={styles.wrapper}>
             <div className={styles.left}>
                 <p className={styles.text}>Далее:</p>
-                <p className={styles.title}>{nextMovie.title}</p>
+                <p className={styles.title}>{nextMovie.title || nextMovie.name}</p>
             </div>
             <div className={styles.right}>
                 <img className={styles.poster} src={`https://image.tmdb.org/t/p/original${nextMovie.backdrop_path}`} alt="" />

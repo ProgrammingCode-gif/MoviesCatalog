@@ -20,7 +20,6 @@ const MovieSlider = ({ movies, topRated, series = false }) => {
     const prevButtonRef = useRef(null);
     const nextButtonRef = useRef(null);
 
-    // Функция обновления состояния навигации
     const updateNavigationState = useCallback(() => {
         if (!swiperRef.current) return;
         const swiper = swiperRef.current.swiper;

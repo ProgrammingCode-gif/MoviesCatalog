@@ -2,25 +2,23 @@ import { useCallback, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
-import styles from './MovieSwapper.module.css'
 import { EffectFade, Autoplay } from "swiper/modules";
-import api from "../../services/api";
 import MovieSwapperItem from "../MovieSwapperItem/MovieSwapperItem";
 
-const MovieSwapper = () => {
+const MovieSwapper = ({fetching}) => {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState(true)
     const [activeMovie, setActiveMovie] = useState(null);
     const [nextMovieIndex, setNextMovieIndex] = useState(1)
 
-    const setNextMovie = useCallback(() => {
-        setActiveMovie(movies[nextMovieIndex])
-    }, [])
+    // const setNextMovie = useCallback(() => {
+    //     setActiveMovie(movies[nextMovieIndex])
+    // }, [])
 
     useEffect(() => {
         const getMovies = async () => {
             try {
-                const data = await api.getTrendingMovies()
+                const data = await fetching()
                 setMovies(data)
                 setActiveMovie(data[0])
             } catch (error) {
