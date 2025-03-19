@@ -23,19 +23,20 @@ const SearchBar = ({onResults, onFilter, isFiltering, results}) => {
 
     useEffect(() => {
 
-        const fetchGenreMovies = async () => {
-            // try {
-            //     const data = await api.searchMovie(debouncedQuery)
-            //     const sortedData = utils.sortMovies(data, searchParams)
-            //     onResults(sortedData || [])
-            // } catch (error) {
-            //     console.log(error);
-            // }
+        const fetchGenreMovies = async (genreId) => {
+            try {
+                const data = await api.getMoviesByGenre(genreId)
+                const sortedData = utils.sortMovies(data, searchParams)
+                onResults(sortedData || [])
+            } catch (error) {
+                console.log(error);
+            }
         }
         
         if(!debouncedQuery.trim()) {
-            if(searchParams.get('genre')) {
-                fetchGenreMovies()
+            const genreId = searchParams.get('genre')
+            if(genreId) {
+                fetchGenreMovies(genreId)
                 return
             }
             return

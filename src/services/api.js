@@ -172,6 +172,24 @@ class API {
             return []
         }
     }
+
+    async getMoviesByGenre(genreId, page = 1) {
+        try {
+            const moviesResponse = await axios.get(`${BASE_URL}/discover/movie?&with_genres=${genreId}&language=ru-RU&page=${page}`, params)
+            const seriesResponse = await axios.get(`${BASE_URL}/discover/tv?&with_genres=${genreId}&language=ru-RU&page=${page}`, params)
+
+            const combined = [
+                ...moviesResponse.data.results.map(movie => ({ ...movie, media_type: "movie" })),
+                ...seriesResponse.data.results.map(show => ({ ...show, media_type: "tv" }))
+            ]
+
+            return combined
+        } catch (error) {
+            console.log(error);
+            return []
+        }
+        
+    }
 }
 
 export default new API()
