@@ -46,7 +46,6 @@ const NavBar = () => {
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/search"><FiSearch className={`${styles.linkIcon} ${styles.searchIcon}`} /></NavLink>
                     </li>
                 </ul>
-
             </Container>
         </nav>
     )

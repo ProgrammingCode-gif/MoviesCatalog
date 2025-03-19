@@ -22,12 +22,26 @@ const SearchBar = ({onResults, onFilter, isFiltering, results}) => {
     }, [query])
 
     useEffect(() => {
+
+        const fetchGenreMovies = async () => {
+            // try {
+            //     const data = await api.searchMovie(debouncedQuery)
+            //     const sortedData = utils.sortMovies(data, searchParams)
+            //     onResults(sortedData || [])
+            // } catch (error) {
+            //     console.log(error);
+            // }
+        }
         
         if(!debouncedQuery.trim()) {
-            onResults([])
+            if(searchParams.get('genre')) {
+                fetchGenreMovies()
+                return
+            }
             return
         }
 
+        
         const fetchMovies = async () => {
             try {
                 const data = await api.searchMovie(debouncedQuery)
