@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNWY4MGNhMjVjYWExNzgwMzUzNzE1MmJiNjRmZGZmNiIsIm5iZiI6MTY4NjM4OTEyMi43OTEwMDAxLCJzdWIiOiI2NDg0NDE4MmUzNzVjMDAxMWM3ZmFmOWMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.4UgPR15RWS_DO8W9VLFZJjTKGe6Stu0Dc9JWFKKX5RM'
-const BASE_URL = 'https://api.themoviedb.org/3'
+const API_KEY = import.meta.env.VITE_API_KEY
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 const params = {
     headers: {
