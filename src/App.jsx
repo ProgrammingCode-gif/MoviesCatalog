@@ -8,7 +8,7 @@ function App() {
       <header>
         <NavBar />
       </header>
-      <AppRoutes />
+        <AppRoutes />
     </Router>
   )
 }

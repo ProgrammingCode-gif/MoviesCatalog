@@ -1,0 +1,20 @@
+.wrapperGrey {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    padding: 20px 0;
+}
+
+.wrapperBlack {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    background: transparent;
+}
+
+.title {
+    font-weight: 400;
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

@@ -1,5 +1,6 @@
 .movieList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+    justify-content: center;
+    gap: 15px;
 }
