@@ -10,6 +10,7 @@ const MovieListInfinite = ({fetching}) => {
     useEffect(() => {
         const getMovies = async () => {
             try {
+                setLoading(true)
                 const data = await fetching(page)
                 setMovies((prev) => {
                     const combined = [...prev, ...data]
@@ -40,7 +41,8 @@ const MovieListInfinite = ({fetching}) => {
     return (
         <div>
             <MovieList movies={movies} />
-            <div ref={observerRef} style={{height: '20px'}}></div>
+            {loading && <div style={{textAlign: 'center', margin: '20px 0'}}>Loading...</div>}
+            <div ref={observerRef} style={{height: '5px', marginBottom: '10px'}}></div>
         </div>
     )
 }
