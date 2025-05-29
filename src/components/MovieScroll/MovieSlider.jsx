@@ -12,7 +12,7 @@ import { SlArrowRight, SlArrowLeft } from 'react-icons/sl';
 import TopRatedCard from '../TopRatedCard/TopRatedCard';
 import { Link } from 'react-router-dom';
 
-const MovieSlider = ({ movies, topRated, series = false }) => {
+const MovieSlider = ({ movies, topRated, series = false, isInfinite = false, onReachEnd }) => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
@@ -38,54 +38,72 @@ const MovieSlider = ({ movies, topRated, series = false }) => {
             swiperInstance.navigation.update();
             updateNavigationState();
 
-            // Добавляем события для мгновенного обновления состояния кнопок
             swiperInstance.on('slideChange', updateNavigationState);
             swiperInstance.on('progress', updateNavigationState);
             swiperInstance.on('touchMove', updateNavigationState);
             swiperInstance.on('transitionEnd', updateNavigationState);
-            swiperInstance.on('scroll', updateNavigationState); // исправление для плавной прокрутки
+            swiperInstance.on('scroll', updateNavigationState);
+
+            swiperInstance.on('reachEnd', () => {
+                if (typeof onReachEnd === 'function') {
+                    onReachEnd();
+                }
+            });
+    
+            return () => {
+                swiperInstance.off('reachEnd');
+            };
         }
-    }, [updateNavigationState]);
+    }, [updateNavigationState, onReachEnd]);
 
     return (
         <div className={styles.movieSlider}>
-                <Container className={styles.sliderContainer}>
-                    <Swiper
-                        ref={swiperRef}
-                        slidesPerView={'auto'}
-                        spaceBetween={10}
-                        modules={[Mousewheel, Navigation, FreeMode]}
-                        freeMode={{
-                            enabled: true,
-                            momentum: true,
-                            momentumRatio: 0.5,
-                            momentumVelocityRatio: 0.8,
-                        }}
-                        mousewheel={{
-                            enabled: true,
-                            forceToAxis: true,
-                            releaseOnEdges: false,
-                        }}
-                        navigation={{
-                            nextEl: nextButtonRef.current,
-                            prevEl: prevButtonRef.current,
-                        }}
-                        className={styles.swiper}
-                    >
-                        {movies?.map((movie, index) => (
-                            <SwiperSlide key={movie.id} className={styles.movieItem}>
-                                {topRated ? (
-                                        <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
-                                ) : (
-                                    <Link className={styles.cardLink} to={movie.media_type == 'tv' || series ? `/series/${movie.id}` : `/movies/${movie.id}`}>
-                                        <MovieCard posterPath={movie.poster_path} title={movie.title || movie.name} />
-                                    </Link>
-                                )}
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                </Container>
-
+            <Container className={styles.sliderContainer}>
+                <Swiper
+                    ref={swiperRef}
+                    slidesPerView={'auto'}
+                    spaceBetween={10}
+                    modules={[Mousewheel, Navigation, FreeMode]}
+                    freeMode={{
+                        enabled: true,
+                        momentum: true,
+                        momentumRatio: 0.5,
+                        momentumVelocityRatio: 0.8,
+                    }}
+                    mousewheel={{
+                        enabled: true,
+                        forceToAxis: true,
+                        releaseOnEdges: false,
+                    }}
+                    navigation={{
+                        nextEl: nextButtonRef.current,
+                        prevEl: prevButtonRef.current,
+                    }}
+                    className={styles.swiper}
+                >
+                    {movies?.map((movie, index) => (
+                        <SwiperSlide key={movie.id} className={styles.movieItem}>
+                            {topRated ? (
+                                <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
+                            ) : (
+                                <Link
+                                    className={styles.cardLink}
+                                    to={
+                                        movie.media_type === 'tv' || series
+                                            ? `/series/${movie.id}`
+                                            : `/movies/${movie.id}`
+                                    }
+                                >
+                                    <MovieCard
+                                        posterPath={movie.poster_path}
+                                        title={movie.title || movie.name}
+                                    />
+                                </Link>
+                            )}
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </Container>
 
             <div
                 ref={prevButtonRef}
