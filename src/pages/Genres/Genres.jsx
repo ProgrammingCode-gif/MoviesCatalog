@@ -27,9 +27,9 @@ const Genres = () => {
 
     return (
         <div className={styles.wrapper}>
-            <Container>
+            {/* <Container>
                 <h2 className={styles.title}>Жанры</h2>
-            </Container>
+            </Container> */}
             {loading ? <div className={styles.loading}>Загрузка...</div> : 
                 genres.map((genre, index) => (
                     <GenreGroup index={index} key={genre.id} genre={genre} />

@@ -5,26 +5,16 @@ import "swiper/css/effect-fade";
 import { EffectFade, Autoplay } from "swiper/modules";
 import MovieSwapperItem from "../MovieSwapperItem/MovieSwapperItem";
 
-const MovieSwapper = ({fetching}) => {
-    const [movies, setMovies] = useState([])
-    const [loading, setLoading] = useState(true)
+const MovieSwapper = ({content}) => {
     const [activeMovie, setActiveMovie] = useState(null);
     const [nextMovieIndex, setNextMovieIndex] = useState(1)
-
-    // const setNextMovie = useCallback(() => {
-    //     setActiveMovie(movies[nextMovieIndex])
-    // }, [])
 
     useEffect(() => {
         const getMovies = async () => {
             try {
-                const data = await fetching()
-                setMovies(data)
-                setActiveMovie(data[0])
+                setActiveMovie(content[0])
             } catch (error) {
                 console.log(error);
-            } finally {
-                setLoading(false)
             }
         }
 
@@ -39,8 +29,8 @@ const MovieSwapper = ({fetching}) => {
             
             fadeEffect={{ crossFade: true }}
             onSlideChange={(swiper) => {
-                setActiveMovie(movies[swiper.realIndex])
-                if(swiper.realIndex < movies.length - 1) {
+                setActiveMovie(content[swiper.realIndex])
+                if(swiper.realIndex < content.length - 1) {
                     setNextMovieIndex(swiper.realIndex + 1)
                 } else {
                     setNextMovieIndex(0)
@@ -48,8 +38,7 @@ const MovieSwapper = ({fetching}) => {
             }}
         >
             {
-            !loading &&
-                movies.map(movie => <SwiperSlide key={movie.id}><MovieSwapperItem setActiveMovie={setActiveMovie} movie={movie} movies={movies} activeMovie={activeMovie} nextMovieIndex={nextMovieIndex}/> </SwiperSlide>)
+                content.map(movie => <SwiperSlide key={movie.id}><MovieSwapperItem setActiveMovie={setActiveMovie} movie={movie} movies={content} activeMovie={activeMovie} nextMovieIndex={nextMovieIndex}/> </SwiperSlide>)
             }
         </Swiper>
     )
