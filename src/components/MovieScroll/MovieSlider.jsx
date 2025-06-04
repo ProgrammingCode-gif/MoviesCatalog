@@ -11,7 +11,6 @@ import Container from '../Container/Container';
 import { SlArrowRight, SlArrowLeft } from 'react-icons/sl';
 import TopRatedCard from '../TopRatedCard/TopRatedCard';
 import { Link } from 'react-router-dom';
-import SkeletonCard from '../SkeletonCard/SkeletonCard';
 
 const MovieSlider = ({ movies, topRated, series = false, onReachEnd }) => {
     const [isBeginning, setIsBeginning] = useState(true);

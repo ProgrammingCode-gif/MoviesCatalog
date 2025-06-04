@@ -4,13 +4,10 @@ import Container from '../../Container/Container';
 import MovieSlider from '../../MovieScroll/MovieSlider';
 
 const GenreGroup = ({ genre, index, movies, onReachEnd }) => {
-    const isBlack = index % 2 === 0;
-    const wrapperStyles = isBlack ? styles.wrapperBlack : styles.wrapperGrey;
-
     const name = genre.name.charAt(0).toUpperCase() + genre.name.slice(1);
 
     return (
-        <div className={wrapperStyles}>
+        <div className={styles.wrapper}>
             <Container>
                 <p className={styles.title}>{name}</p>
             </Container>

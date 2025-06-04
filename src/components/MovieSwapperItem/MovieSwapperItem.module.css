@@ -37,7 +37,7 @@
 
 .currentMovieText {
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Количество строк */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     width: 70%;

@@ -66,7 +66,7 @@ const Genres = () => {
                         genre={genre}
                         index={index}
                         movies={genreMovies[genre.id]?.movies || []}
-                        onReachEnd={() => handleLoadMore(genre.id)}
+                        onReachEnd={() => handleMoreMovies(genre.id)}
                     />
                 ))
             }
