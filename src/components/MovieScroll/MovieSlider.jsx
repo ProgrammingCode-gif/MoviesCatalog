@@ -11,8 +11,9 @@ import Container from '../Container/Container';
 import { SlArrowRight, SlArrowLeft } from 'react-icons/sl';
 import TopRatedCard from '../TopRatedCard/TopRatedCard';
 import { Link } from 'react-router-dom';
+import SkeletonCard from '../SkeletonCard/SkeletonCard';
 
-const MovieSlider = ({ movies, topRated, series = false, isInfinite = false, onReachEnd }) => {
+const MovieSlider = ({ movies, topRated, series = false, onReachEnd }) => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
@@ -49,7 +50,7 @@ const MovieSlider = ({ movies, topRated, series = false, isInfinite = false, onR
                     onReachEnd();
                 }
             });
-    
+
             return () => {
                 swiperInstance.off('reachEnd');
             };
@@ -57,6 +58,7 @@ const MovieSlider = ({ movies, topRated, series = false, isInfinite = false, onR
     }, [updateNavigationState, onReachEnd]);
 
     return (
+
         <div className={styles.movieSlider}>
             <Container className={styles.sliderContainer}>
                 <Swiper
@@ -80,28 +82,28 @@ const MovieSlider = ({ movies, topRated, series = false, isInfinite = false, onR
                         prevEl: prevButtonRef.current,
                     }}
                     className={styles.swiper}
-                >
-                    {movies?.map((movie, index) => (
-                        <SwiperSlide key={movie.id} className={styles.movieItem}>
-                            {topRated ? (
-                                <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
-                            ) : (
-                                <Link
-                                    className={styles.cardLink}
-                                    to={
-                                        movie.media_type === 'tv' || series
-                                            ? `/series/${movie.id}`
-                                            : `/movies/${movie.id}`
-                                    }
-                                >
-                                    <MovieCard
-                                        posterPath={movie.poster_path}
-                                        title={movie.title || movie.name}
-                                    />
-                                </Link>
-                            )}
-                        </SwiperSlide>
-                    ))}
+                >{
+                        movies.map((movie, index) => (
+                            <SwiperSlide key={movie.id} className={styles.movieItem}>
+                                {topRated ? (
+                                    <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
+                                ) : (
+                                    <Link
+                                        className={styles.cardLink}
+                                        to={
+                                            movie.media_type === 'tv' || series
+                                                ? `/series/${movie.id}`
+                                                : `/movies/${movie.id}`
+                                        }
+                                    >
+                                        <MovieCard
+                                            posterPath={movie.poster_path}
+                                            title={movie.title || movie.name}
+                                        />
+                                    </Link>
+                                )}
+                            </SwiperSlide>
+                        ))}
                 </Swiper>
             </Container>
 

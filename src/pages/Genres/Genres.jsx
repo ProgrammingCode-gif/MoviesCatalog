@@ -3,20 +3,32 @@ import styles from './Genres.module.css'
 import Container from '../../components/Container/Container'
 import api from '../../services/api'
 import GenreGroup from '../../components/Genres/GenreGroup/GenreGroup'
+import Loading from '../../components/Loading/Loading'
 
 const Genres = () => {
     const [genres, setGenres] = useState([])
+    const [genreMovies, setGenreMovies] = useState({});
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const getGenres = async () => {
             try {
                 setLoading(true)
-                const data = await api.getMoviesGenres()
-                setGenres(data)
-                
+                const genresData = await api.getMoviesGenres()
+                setGenres(genresData);
+
+                const moviesByGenre = {}
+
+                for(const genre of genresData) {
+                    const movies = await api.getMoviesByGenre(genre.id, 1);
+                    moviesByGenre[genre.id] = {
+                        page: 1,
+                        movies,
+                    };
+                }
+                setGenreMovies(moviesByGenre);
             } catch (error) {
-                
+                console.log(error);
             } finally {
                 setLoading(false)
             }
@@ -25,14 +37,37 @@ const Genres = () => {
         getGenres()
     }, [])
 
+    const handleMoreMovies = async (genreId) => {
+        const genreData = genreMovies[genreId];
+        const nextPage = genreData.page + 1;
+
+        try {
+            const newMovies = await api.getMoviesByGenre(genreId, nextPage);
+            const existingIds = new Set(genreData.movies.map(movie => movie.id));
+            const filteredMovies = newMovies.filter(movie => !existingIds.has(movie.id));
+            setGenreMovies((prev) => ({
+                ...prev,
+                [genreId]: {
+                    page: nextPage,
+                    movies: [...prev[genreId].movies, ...filteredMovies],
+                },
+            }));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className={styles.wrapper}>
-            {/* <Container>
-                <h2 className={styles.title}>Жанры</h2>
-            </Container> */}
-            {loading ? <div className={styles.loading}>Загрузка...</div> : 
+            {loading ? <Loading /> :
                 genres.map((genre, index) => (
-                    <GenreGroup index={index} key={genre.id} genre={genre} />
+                    <GenreGroup
+                        key={genre.id}
+                        genre={genre}
+                        index={index}
+                        movies={genreMovies[genre.id]?.movies || []}
+                        onReachEnd={() => handleLoadMore(genre.id)}
+                    />
                 ))
             }
         </div>
