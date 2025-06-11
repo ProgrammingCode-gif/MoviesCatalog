@@ -26,7 +26,6 @@ const Home = () => {
         setPopularMovies(popularMoviesData)
         setSwapperMovies(swapperData)
         setLoading(true)
-        await api.getTrendingMoviesAndSeries()
       } catch (error) {
         console.error('Error fetching trending movies and series:', error)
       } finally {

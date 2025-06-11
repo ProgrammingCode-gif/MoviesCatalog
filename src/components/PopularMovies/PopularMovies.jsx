@@ -6,9 +6,9 @@ import MovieSlider from '../MovieScroll/MovieSlider'
 
 import { IoIosArrowForward } from "react-icons/io";
 import TrailerPreview from '../TrailerPreview/TrailerPreview'
+import { Link } from 'react-router-dom'
 
 const Popular = ({onTrailer, movies}) => {
-    const [movieWithTrailerId, setMovieWithTrailerId] = useState()
 
     useEffect(() => {
         const getMovies = async () => {
@@ -26,7 +26,7 @@ const Popular = ({onTrailer, movies}) => {
     return (
         <section className={styles.popular}>
             <Container>
-                <h2 className={styles.title}>Популярное <IoIosArrowForward /></h2>
+                <Link to={"/movies"} className={styles.title}>Популярное <IoIosArrowForward /></Link>
             </Container>
 
             <MovieSlider movies={movies}></MovieSlider>
