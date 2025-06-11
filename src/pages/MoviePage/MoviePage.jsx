@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import api from '../../services/api'
 import MoviePageHeader from '../../components/MoviePageHeader/MoviePageHeader'
 import MoviePageMain from '../../components/MoviePageMain/MoviePageMain'
+import Loading from '../../components/Loading/Loading'
 
 const MoviePage = ({series = false}) => {
     const { movieId } = useParams()
@@ -19,7 +20,8 @@ const MoviePage = ({series = false}) => {
 
                 const data = await api.getMovieDetails(movieId, series)
                 const castData = await api.getCast(movieId, series)
-                const trailerData = await api.getMovieTrailerUrl(movieId)
+
+                const trailerData = await api.getMovieTrailerUrl(movieId, 0, series)
 
                 setTrailerUrl(trailerData)
                 setMovie(data)
@@ -31,11 +33,19 @@ const MoviePage = ({series = false}) => {
             }
         }
         getMovie()
+
+        return () => {
+            setMovie(null)
+            setCast(null)
+            setTrailerUrl(null)
+            setIsTrailerOpened(false)
+        }
     }, [movieId])
     return (
         <>
+            {loading && <div className="loading-container"><Loading /></div>}
             <div>
-                {!loading && <MoviePageHeader isTrailerOpened={isTrailerOpened} onTrailer={() => setIsTrailerOpened(prev => !prev)} movie={movie} cast={cast} />
+                {!loading && <MoviePageHeader trailerUrl={trailerUrl} isTrailerOpened={isTrailerOpened} onTrailer={() => setIsTrailerOpened(prev => !prev)} movie={movie} cast={cast} />
 
                 }
             </div>

@@ -17,15 +17,24 @@ const Genres = () => {
                 const genresData = await api.getMoviesGenres()
                 setGenres(genresData);
 
-                const moviesByGenre = {}
-
-                for(const genre of genresData) {
+                const moviesPromises = genresData.map(async (genre) => {
                     const movies = await api.getMoviesByGenre(genre.id, 1);
-                    moviesByGenre[genre.id] = {
-                        page: 1,
-                        movies,
+                    return {
+                        id: genre.id,
+                        data: {
+                            page: 1,
+                            movies,
+                        }
                     };
-                }
+                })
+
+                const moviesData = await Promise.all(moviesPromises);
+                const moviesByGenre = {}
+                
+                moviesData.forEach(({ id, data }) => {
+                    moviesByGenre[id] = data;
+                });
+                
                 setGenreMovies(moviesByGenre);
             } catch (error) {
                 console.log(error);

@@ -26,6 +26,24 @@ const MoviePageMain = ({ movie, isSeries = false, trailerUrl, isTrailerOpened })
     }, [movie.id])
     return (
         <main className={styles.main}>
+                        <AnimatePresence>
+                { isTrailerOpened && trailerUrl &&
+                    <motion.div className={styles.trailer} key={trailerUrl}
+                        initial={{ opacity: 0,}}
+                        exit={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        >
+                        <iframe
+                            src={trailerUrl}
+                            title="Movie Trailer"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className={styles.trailerVideo}
+                        ></iframe>
+                    </motion.div>
+                }
+            </AnimatePresence>
             <Container>
                 <div className={styles.info}>
                     <div className={styles.infoItem}>
@@ -47,24 +65,7 @@ const MoviePageMain = ({ movie, isSeries = false, trailerUrl, isTrailerOpened })
                 </div>
             </Container>
             {/* <Container> */}
-            <AnimatePresence>
-                { isTrailerOpened && trailerUrl &&
-                    <motion.div className={styles.trailer} key={trailerUrl}
-                        initial={{ opacity: 0,}}
-                        exit={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        >
-                        <iframe
-                            src={trailerUrl}
-                            title="Movie Trailer"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                            className={styles.trailerVideo}
-                        ></iframe>
-                    </motion.div>
-                }
-            </AnimatePresence>
+
 
             {/* </Container> */}
 

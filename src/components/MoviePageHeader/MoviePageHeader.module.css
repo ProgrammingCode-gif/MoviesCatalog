@@ -115,6 +115,20 @@
     cursor: pointer;
 }
 
+.btnUnavailable {
+    width: max-content;
+    margin-top: 30px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.589);
+    pointer-events: none;
+}
+
 .bottom {
     margin-top: 30px;
     display: flex;
