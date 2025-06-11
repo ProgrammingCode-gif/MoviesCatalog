@@ -4,7 +4,7 @@ import Container from '../Container/Container'
 import { FaPlay } from "react-icons/fa";
 import ActorCard from '../ActorCard/ActorCard';
 
-const MoviePageHeader = ({ movie, cast }) => {
+const MoviePageHeader = ({ movie, cast, onTrailer, isTrailerOpened }) => {
     return (
         <div className={styles.wrapper}>
             <Container className={styles.container}>
@@ -18,10 +18,10 @@ const MoviePageHeader = ({ movie, cast }) => {
                             </div>
                         </div>
 
-                        <button className={styles.btn}>
+                        <button className={styles.btn} onClick={onTrailer}>
                             <FaPlay />
                             <p>
-                                Смотреть трейлер
+                                {isTrailerOpened ? 'Закрыть трейлер' : 'Смотреть трейлер'}
                             </p>
                         </button>
                     </div>

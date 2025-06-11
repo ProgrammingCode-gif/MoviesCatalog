@@ -4,8 +4,9 @@ import Container from '../Container/Container'
 import utils from '../../utils/utils'
 import MovieSlider from '../MovieScroll/MovieSlider'
 import api from '../../services/api'
+import { AnimatePresence, motion } from 'framer-motion'
 
-const MoviePageMain = ({ movie, isSeries = false }) => {
+const MoviePageMain = ({ movie, isSeries = false, trailerUrl, isTrailerOpened }) => {
     const [recomendations, setRecomendations] = useState(null)
     const [loading, setLoading] = useState(true)
 
@@ -45,6 +46,28 @@ const MoviePageMain = ({ movie, isSeries = false }) => {
                     </div>
                 </div>
             </Container>
+            {/* <Container> */}
+            <AnimatePresence>
+                { isTrailerOpened && trailerUrl &&
+                    <motion.div className={styles.trailer} key={trailerUrl}
+                        initial={{ opacity: 0,}}
+                        exit={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        >
+                        <iframe
+                            src={trailerUrl}
+                            title="Movie Trailer"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className={styles.trailerVideo}
+                        ></iframe>
+                    </motion.div>
+                }
+            </AnimatePresence>
+
+            {/* </Container> */}
+
                 <div className={styles.recomendations}>
                     <Container>
                         <p className={styles.recomendationsText}>Рекомендации</p>

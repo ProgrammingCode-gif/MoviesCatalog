@@ -9,13 +9,19 @@ const MoviePage = ({series = false}) => {
     const [movie, setMovie] = useState()
     const [cast, setCast] = useState()
     const [loading, setLoading] = useState(true)
+    const [isTrailerOpened, setIsTrailerOpened] = useState(false)
+    const [trailerUrl, setTrailerUrl] = useState()
 
     useEffect(() => {
         const getMovie = async () => {
             try {
                 setLoading(true)
+
                 const data = await api.getMovieDetails(movieId, series)
                 const castData = await api.getCast(movieId, series)
+                const trailerData = await api.getMovieTrailerUrl(movieId)
+
+                setTrailerUrl(trailerData)
                 setMovie(data)
                 setCast(castData.slice(0, 5))
             } catch (error) {
@@ -29,12 +35,12 @@ const MoviePage = ({series = false}) => {
     return (
         <>
             <div>
-                {!loading && <MoviePageHeader movie={movie} cast={cast} />
+                {!loading && <MoviePageHeader isTrailerOpened={isTrailerOpened} onTrailer={() => setIsTrailerOpened(prev => !prev)} movie={movie} cast={cast} />
 
                 }
             </div>
             {
-                !loading && <MoviePageMain movie={movie} isSeries={series}/>
+                !loading && <MoviePageMain trailerUrl={trailerUrl} isTrailerOpened={isTrailerOpened} movie={movie} isSeries={series}/>
             }
         </>
     )
