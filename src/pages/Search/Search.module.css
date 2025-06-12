@@ -3,5 +3,12 @@
     font-weight: 500;
     font-size: 30px;
     color: rgba(255, 255, 255, 0.479);
-    margin-bottom: 50vh;
+    /* margin-bottom: 40vh; */
+}
+
+.searchPage {
+    display: flex;
+    height: 95vh;;
+    flex-direction: column;
+    justify-content: space-between;
 }

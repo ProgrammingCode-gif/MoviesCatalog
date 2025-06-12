@@ -30,6 +30,7 @@ const NavBar = () => {
                     <Link className={styles.logo} to="/">AbsoluteCinema</Link>
                 </div>
                 <ul className={styles.navBarList}>
+
                     <li>
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/"><RiHome2Line className={styles.linkIcon} /> Главная</NavLink>
                     </li>
@@ -42,6 +43,11 @@ const NavBar = () => {
                     <li>
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/genres"><MdOutlineMovie className={styles.linkIcon} />Жанры</NavLink>
                     </li>
+                    <li>
+                        <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/search"><FiSearch className={`${styles.linkIcon} ${styles.searchIcon}`} /></NavLink>
+                    </li>
+                </ul>
+                <ul className={styles.navBarListMobile}>
                     <li>
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/search"><FiSearch className={`${styles.linkIcon} ${styles.searchIcon}`} /></NavLink>
                     </li>

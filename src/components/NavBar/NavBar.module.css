@@ -34,6 +34,10 @@
     gap: 70px;
 }
 
+.navBarListMobile {
+    display: none;
+}
+
 .navBarLink {
     color: rgba(255, 255, 255, 0.654);
     font-size: 22px;
@@ -70,5 +74,14 @@
     }
     .navBarLink {
         font-size: 20px;
+    }
+}
+
+@media (max-width: 991px) {
+    .navBarList {
+        display: none;
+    }
+    .navBarListMobile {
+        display: block;
     }
 }

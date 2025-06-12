@@ -70,6 +70,30 @@
     overflow: hidden;
 }
 
+.rightPoster {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background: #000;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.posterWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.poster {
+    width: 100%;
+    height: 150%;
+    object-fit: cover;
+}
+
 .video {
     width: 100%;
     height: 100%;

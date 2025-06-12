@@ -12,7 +12,7 @@ const Search = () => {
     const [results, setResults] = useState([])
     const [isFiltering, setIsFiltering] = useState(false)
     return (
-        <div>
+        <div className={styles.searchPage}>
             <Container>
                 <SearchBar results={results} isFiltering={isFiltering} onFilter={setIsFiltering} onResults={setResults}/>
                 <SearchFilter isFiltering={isFiltering} />

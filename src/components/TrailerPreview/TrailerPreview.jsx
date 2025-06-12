@@ -55,11 +55,17 @@ const TrailerPreview = ({ movieId }) => {
                                 <button className={styles.btn}>Подробнее</button>
                             </Link>
                         </div>
-                        {trailerUrl &&
+                        {trailerUrl ?
 
                             <div className={styles.right}>
                                 { trailerUrl &&  <iframe className={styles.video} src={trailerUrl} allow='autoplay; encrypted-media' frameBorder="0" placeInline></iframe> }
                                 <div className={styles.overlay}></div>
+                            </div> :
+                            <div className={styles.rightPoster}>
+                                <div className={styles.posterWrapper}>
+                                    <img className={styles.poster} src={`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`} alt="" />
+                                    <div className={styles.overlay}></div>
+                                </div>
                             </div>
                         }
                     </>
