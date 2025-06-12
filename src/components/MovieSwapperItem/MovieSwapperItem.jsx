@@ -46,6 +46,7 @@ const MovieSwapperItem = ({ movie, activeMovie, movies, nextMovieIndex, setActiv
                     )}
                     <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt="" />
                 </div>
+                <div></div>
                 {activeMovie && activeMovie.id === movie.id && (
                     <motion.div
                         className={styles.nextMovie}

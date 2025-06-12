@@ -21,3 +21,18 @@
     font-size: 16px;
     line-height: 30px;
 }
+
+@media (max-width: 1200px) {
+    .actorInfo {
+        padding-right: 10px;
+    }
+
+    .actorPhoto {
+        width: 40px;
+        height: 40px;
+    }
+
+    .actorName {
+        font-size: 14px;
+    }   
+}

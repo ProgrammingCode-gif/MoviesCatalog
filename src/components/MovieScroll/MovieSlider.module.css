@@ -85,3 +85,10 @@
   width: 200px;
   height: 300px;
 }
+
+@media (max-width: 1200px) {
+    .cardLink {
+        width: 175px;
+        height: 262px;
+    }
+}

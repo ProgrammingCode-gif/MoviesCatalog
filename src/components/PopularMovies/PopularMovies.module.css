@@ -14,3 +14,12 @@
     cursor: pointer;
     color: white;
 }
+
+@media (max-width: 1200px) {
+    .popular {
+        margin-top: 50px;
+    }
+    .title {
+        font-size: 20px;
+    }
+}

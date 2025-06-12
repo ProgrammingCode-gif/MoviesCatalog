@@ -2,8 +2,7 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    /* align-items: center; */
-    width: 500px;
+    width: 400px;
     height: 100px;
     background: linear-gradient(90deg, rgba(20,20,20,1) 59%, rgba(20,20,20,0.8996848739495799) 67%, rgba(255,255,255,0) 100%);
     border-radius: 10px;
@@ -68,5 +67,18 @@
     }
     100% {
         left: 0;
+    }
+}
+
+@media (max-width: 1200px) {
+    .wrapper {
+        width: 300px;
+        height: 90px;
+    }
+    .title {
+        font-size: 16px;
+    }
+    .text {
+        font-size: 14px;
     }
 }

@@ -71,3 +71,10 @@
     z-index: 10;
     left: 10px;
 }
+
+@media (max-width: 1200px) {
+    .movieCard {
+        width: 175px;
+        height: 262px;
+    }
+}
