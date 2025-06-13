@@ -58,7 +58,7 @@ const TrailerPreview = ({ movieId }) => {
                         {trailerUrl ?
 
                             <div className={styles.right}>
-                                { trailerUrl &&  <iframe className={styles.video} src={trailerUrl} allow='autoplay; encrypted-media' frameBorder="0" placeInline></iframe> }
+                                { trailerUrl &&  <iframe className={styles.video} src={trailerUrl} allow='autoplay; encrypted-media' frameBorder="0"></iframe> }
                                 <div className={styles.overlay}></div>
                             </div> :
                             <div className={styles.rightPoster}>

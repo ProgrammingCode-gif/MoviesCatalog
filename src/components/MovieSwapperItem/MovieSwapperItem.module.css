@@ -98,3 +98,21 @@
         width: 105%;
     }
 }
+
+@media (max-width: 991px) {
+    .currentMovie {
+        max-height: 400px;
+    }
+    .currentMovieAbout {
+        align-items: center;
+        text-align: center;
+    }
+    .currentMovieTitle {
+        font-size: 40px;
+        line-height: 60px;
+    }
+    .currentMovieText {
+        width: 80%;
+        font-size: 18px;
+    }
+}

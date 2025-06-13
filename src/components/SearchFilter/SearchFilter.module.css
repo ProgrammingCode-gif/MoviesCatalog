@@ -32,9 +32,41 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    row-gap: 0;
+    row-gap: 10px;
 }
 
 .sectionOptions {
     margin-top: 20px;
+}
+
+@media (max-width: 1200px) {
+    .filter {
+        margin-top: 50px;
+    }
+    .filterSection {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 991px) {
+    .filter {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .filterSection {
+        width: 100%;
+        height: 150px;
+    }
+    .filterSection:last-child {
+        grid-column: span 2;
+
+    }
+    .sectionOptions {
+        margin-top: 15px;
+    }
+    .sectionName {
+        font-size: 20px;
+    }
 }

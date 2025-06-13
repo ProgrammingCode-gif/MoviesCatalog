@@ -62,6 +62,7 @@ const NavBar = () => {
             <AnimatePresence>
                 {isBurgerOpen && 
                     <motion.div className={styles.burgerOverlay}
+                        onClick={() => setIsBurgerOpen(false)}
                         initial={{ opacity: 0 }}
                         exit={{ opacity: 0 }}
                         animate={{ opacity: 1 }}

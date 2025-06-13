@@ -91,4 +91,17 @@
         width: 175px;
         height: 262px;
     }
+    .movieSlider {
+        height: 300px;
+    }
+}
+
+@media (max-width: 991px) {
+  .cardLink {
+    width: 150px;
+    height: 225px;
+  }
+  .movieSlider {
+    height: 250px;
+  }
 }

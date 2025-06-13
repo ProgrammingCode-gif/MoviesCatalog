@@ -82,3 +82,9 @@
         font-size: 14px;
     }
 }
+
+@media (max-width: 991px) {
+    .wrapper {
+        display: none;
+    }
+}

@@ -143,3 +143,49 @@
     font-weight: 500;
     color: rgba(255, 255, 255, 0.589);
 }
+
+@media (max-width: 1200px) {
+    .right {
+        width: 240px;
+        height: 360px;
+    }
+    .rightBackground {
+        width: 80%;
+    }   
+    .overview {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 25px;
+        margin-top: 20px;
+    }
+    .container {
+        margin-top: 50px;
+        padding: 50px 0;
+    }
+    .title {
+        font-size: 30px;
+        max-width: 90%;
+    }
+    .genres {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 991px) {
+    .right {
+        width: 200px;
+        height: 300px;
+    }
+    .rightBackground {
+        width: 100%;
+    }
+    .bottom {
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 0px auto;
+    }
+    .container {
+        padding: 20px 0;
+    }
+}

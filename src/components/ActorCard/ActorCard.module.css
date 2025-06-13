@@ -36,3 +36,18 @@
         font-size: 14px;
     }   
 }
+
+@media (max-width: 991px) {
+    .actorInfo {
+        padding-right: 5px;
+    }
+
+    .actorPhoto {
+        width: 35px;
+        height: 35px;
+    }
+
+    .actorName {
+        font-size: 12px;
+    }
+}

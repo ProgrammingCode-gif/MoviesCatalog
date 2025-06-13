@@ -46,3 +46,40 @@
     width: 100%;
     height: 600px;
 }
+
+@media (max-width: 1200px) {
+    .info {
+        margin-top: 30px;
+    }
+    .infoItemTitle {
+        font-size: 20px;
+    }
+    .infoItemValue {
+        font-size: 18px;
+    }
+    .trailerVideo {
+        height: 400px;
+    }
+    .recomendations {
+        margin-top: 30px;
+    }
+    .recomendationsText {
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 991px) {
+    .infoItemTitle {
+        font-size: 18px;
+    }
+    .infoItemValue {
+        font-size: 16px;
+    }
+    .trailerVideo {
+        height: 300px;
+    }
+    .recomendationsText {
+        font-size: 18px;
+    }
+}

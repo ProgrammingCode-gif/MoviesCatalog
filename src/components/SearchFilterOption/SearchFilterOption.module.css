@@ -11,3 +11,8 @@
     background: #8e8e8e29;
 }
 
+@media (max-width: 991px) {
+    .sectionOption {
+        font-size: 15px;
+    }
+}

@@ -13,7 +13,13 @@ const SearchRecomendations = () => {
         const getSeries = async () => {
             try {
                 const data = await api.getTrendingMoviesAndSeries(page)
-                setMovies(prev => [...prev, ...data])
+
+                setMovies((prev) => {
+                    const combined = [...prev, ...data]
+                    const unique = Array.from(new Set(combined.map(movie => movie.id)))
+                        .map(id => combined.find(movie => movie.id === id))
+                    return unique
+                })
             } catch (error) {
                 console.log(error);
             } finally {
