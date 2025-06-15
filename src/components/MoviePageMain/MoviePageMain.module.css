@@ -83,3 +83,18 @@
         font-size: 18px;
     }
 }
+
+@media (max-width: 767px) {
+    .infoItemTitle {
+        font-size: 16px;
+    }
+    .infoItemValue {
+        font-size: 14px;
+    }
+    .trailerVideo {
+        height: 200px;
+    }
+    .recomendationsText {
+        font-size: 16px;
+    }
+}

@@ -105,3 +105,13 @@
     height: 250px;
   }
 }
+
+@media (max-width: 767px) {
+  .cardLink {
+    width: 120px;
+    height: 180px;
+  }
+  .movieSlider {
+    height: 200px;
+  }
+}

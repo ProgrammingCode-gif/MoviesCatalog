@@ -17,7 +17,18 @@
 }
 
 @media (max-width: 1200px) {
- .seriesTitle {
-    font-size: 20px;
- }   
+    .seriesTitle {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .series {
+        margin-top: 30px;
+        margin-bottom: 0px;
+    }
+
+    .seriesTitle {
+        font-size: 16px;
+    }
 }

@@ -85,3 +85,13 @@
         height: 225px;
     }
 }
+
+@media (max-width: 767px) {
+    .movieCard {
+        width: 120px;
+        height: 180px;
+    }
+    .movieCardAbout {
+        font-size: 14px;
+    }
+}

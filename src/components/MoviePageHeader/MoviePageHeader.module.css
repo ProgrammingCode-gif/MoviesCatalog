@@ -186,6 +186,34 @@
         margin: 0px auto;
     }
     .container {
-        padding: 20px 0;
+        padding: 30px 0;
+    }
+    .overview {
+        font-size: 16px;
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .right {
+        width: 175px;
+        height: 262px;
+    }
+    .title {
+        font-size: 24px;
+        max-width: 100%;
+    }
+    .bottom {
+        width: 100%;
+    }
+    .rightBackground {
+        width: 120% ;
+    }
+    .backdropOverlay {
+        background: linear-gradient(90deg, rgb(0, 0, 1) 10%,rgba(0, 0, 0, 0.826) 50%, rgba(255,255,255,0) 100%);
     }
 }

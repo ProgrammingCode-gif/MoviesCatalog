@@ -131,3 +131,22 @@
         transform: translateY(-4px);
     }
 }
+
+@media (max-width: 767px) {
+    .navBarListMobile {
+        gap: 20px;
+    }
+    .navBarLink {
+        font-size: 20px;
+    }
+    .burgerMenu {
+        padding: 0 20px;
+    }
+    .burgerTitle {
+        font-size: 20px;
+    }
+    .searchLink {
+        font-size: 25px;
+    }
+
+}
