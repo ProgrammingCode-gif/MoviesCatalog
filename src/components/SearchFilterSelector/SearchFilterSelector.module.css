@@ -2,7 +2,7 @@
     position: relative;
     width: 80%;
     cursor: pointer;
-    z-index: 100;
+    z-index: 5;
     overflow: visible;
 }
 

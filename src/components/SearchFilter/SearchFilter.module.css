@@ -79,10 +79,11 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 20px;
     }
     .filterSection {
         width: 100%;
-        height: 100px;
+        height: auto;
     }
     .filterSection:last-of-type {
         grid-column: span 1;
@@ -93,5 +94,9 @@
     }
     .sectionOptions {
         margin-top: 10px;
+    }
+
+    .filterActive {
+        max-height: 400px;
     }
 }

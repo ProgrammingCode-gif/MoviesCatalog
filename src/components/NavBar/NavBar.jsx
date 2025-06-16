@@ -7,6 +7,7 @@ import { FiSearch } from "react-icons/fi";
 import { RiHome2Line } from "react-icons/ri";
 import { MdOutlineMovie } from "react-icons/md";
 import { MdOutlineLocalMovies } from "react-icons/md";
+import { RiFilmAiLine } from "react-icons/ri";
 import BurgerMenuBtn from '../BurgerMenuBtn/BurgerMenuBtn';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -44,7 +45,7 @@ const NavBar = () => {
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/movies"><MdOutlineMovie className={styles.linkIcon} />Фильмы</NavLink>
                     </li>
                     <li>
-                        <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/genres"><MdOutlineMovie className={styles.linkIcon} />Жанры</NavLink>
+                        <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/genres"><RiFilmAiLine className={styles.linkIcon} />Жанры</NavLink>
                     </li>
                     <li>
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/search"><FiSearch className={`${styles.linkIcon} ${styles.searchIcon}`} /></NavLink>
@@ -115,7 +116,7 @@ const NavBar = () => {
                                         to="/genres"
                                         onClick={() => setIsBurgerOpen(false)}
                                     >
-                                        <MdOutlineMovie className={styles.linkIcon} />Жанры
+                                        <RiFilmAiLine className={styles.linkIcon} />Жанры
                                     </NavLink>
                                 </li>
                             </ul>
