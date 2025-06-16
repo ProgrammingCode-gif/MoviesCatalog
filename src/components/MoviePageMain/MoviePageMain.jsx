@@ -56,7 +56,7 @@ const MoviePageMain = ({ movie, isSeries = false, trailerUrl, isTrailerOpened })
                     </div>
                     <div className={styles.infoItem}>
                         <p className={styles.infoItemTitle}>Статус:</p>
-                        <p className={styles.infoItemValue}>{movie.status == 'Released' ? 'Выпущено:' : 'В разработке:' || movie.status == 'Ended' ? 'Завершен' : 'Выпускается'}</p>
+                        <p className={styles.infoItemValue}>{movie.status == 'Released' ? 'Выпущено' : 'В разработке' || movie.status == 'Ended' ? 'Завершен' : 'Выпускается'}</p>
                     </div>
                     <div className={styles.infoItem}>
                         <p className={styles.infoItemTitle}>Исходное название:</p>
