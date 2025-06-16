@@ -98,3 +98,27 @@
         font-size: 16px;
     }
 }
+
+@media (max-width: 600px) {
+    .info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .infoItem {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .infoItemTitle {
+        font-size: 18px;
+    }
+    .infoItemValue {
+        font-size: 15px;
+    }
+    .trailerVideo {
+        height: 180px;
+    }
+    .recomendationsText {
+        font-size: 20px;
+    }
+}

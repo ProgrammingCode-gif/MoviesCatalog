@@ -47,19 +47,19 @@ const MoviePageMain = ({ movie, isSeries = false, trailerUrl, isTrailerOpened })
             <Container>
                 <div className={styles.info}>
                     <div className={styles.infoItem}>
-                        <p className={styles.infoItemTitle}>{isSeries ? 'Сезонов' : 'Сборы'}</p>
+                        <p className={styles.infoItemTitle}>{isSeries ? 'Сезонов:' : 'Сборы:'}</p>
                         <p className={styles.infoItemValue}>{isSeries ? movie.number_of_seasons : (movie.budget != 0 ? utils.formatCurrency(movie.budget) : "Неизвестно")}</p>
                     </div>
                     <div className={styles.infoItem}>
-                        <p className={styles.infoItemTitle}>{isSeries ? 'Эпизодов' : 'Сборы'}</p>
+                        <p className={styles.infoItemTitle}>{isSeries ? 'Эпизодов:' : 'Сборы:'}</p>
                         <p className={styles.infoItemValue}>{isSeries ? movie.number_of_episodes : (movie.revenue != 0 ? utils.formatCurrency(movie.revenue) : "Неизвестно")}</p>
                     </div>
                     <div className={styles.infoItem}>
-                        <p className={styles.infoItemTitle}>Статус</p>
-                        <p className={styles.infoItemValue}>{movie.status == 'Released' ? 'Выпущено' : 'В разработке' || movie.status == 'Ended' ? 'Завершен' : 'Выпускается'}</p>
+                        <p className={styles.infoItemTitle}>Статус:</p>
+                        <p className={styles.infoItemValue}>{movie.status == 'Released' ? 'Выпущено:' : 'В разработке:' || movie.status == 'Ended' ? 'Завершен' : 'Выпускается'}</p>
                     </div>
                     <div className={styles.infoItem}>
-                        <p className={styles.infoItemTitle}>Исходное название</p>
+                        <p className={styles.infoItemTitle}>Исходное название:</p>
                         <p className={styles.infoItemValue}>{movie.original_title || movie.original_name}</p>
                     </div>
                 </div>

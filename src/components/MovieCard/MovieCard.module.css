@@ -91,7 +91,23 @@
         width: 120px;
         height: 180px;
     }
+    .movieCard:hover .movieCardAbout {
+        margin-bottom: 0;
+    }
+    .movieCard:hover {
+        transform: scale(1);
+    }
     .movieCardAbout {
         font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .movieCard {
+        width: 110px;
+        height: 160px;
+    }
+    .movieCardAbout {
+        font-size: 12px;
     }
 }

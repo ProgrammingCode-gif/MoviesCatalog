@@ -12,3 +12,10 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
+@media (max-width: 991px) {
+    .emptySearchTitle {
+        font-size: 24px;
+    }
+    
+}

@@ -214,3 +214,55 @@
         margin-top: 10px;
     }
 }
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px 0;
+    }
+    .left {
+        width: 100%;
+        gap: 5px;
+        align-items: center;
+        text-align: center;
+    }
+    .title {
+        font-size: 20px;
+    }
+    .overview {
+        width: 100%;
+        line-height: 25px;
+        font-size: 18px;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+    }
+    .info {
+        margin-top: 20px;
+        width: 100%;
+        font-size: 15px;
+        gap: 0;
+        justify-content: space-between;
+    }
+    .video {
+        top: 0;
+        height: 50%;
+        width: 100%;
+        left: 0;
+        transform: scale(2.2);
+    }
+    .btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    .link {
+        width: 100%;
+    }
+    .overlay {
+        background: linear-gradient(0deg,rgb(0, 0, 0) 40%, rgba(0, 0, 0, 0.41) 80%);
+    }
+    .actors {
+        display: none;
+    }
+
+}
