@@ -1,50 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+
 import PopularMovies from '../../components/PopularMovies/PopularMovies'
 import PopularSeries from '../../components/PopularSeries/PopularSeries'
-import TopRated from '../../components/TopRated/TopRated'
 import MovieSwapper from '../../components/MovieSwapper/MovieSwapper'
 import TrailerPreview from '../../components/TrailerPreview/TrailerPreview'
-import api from '../../services/api'
 import Loading from '../../components/Loading/Loading'
+
+import api from '../../services/api'
 
 const Home = () => {
   const [movieWithTrailerId, setMovieWithTrailerId] = useState()
-  const [loading, setLoading] = useState(true)
 
-  const [swapperMovies, setSwapperMovies] = useState([])
-  const [popularMovies, setPopularMovies] = useState([])
-  const [popularSeries, setPopularSeries] = useState([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true)
-        const swapperData = await api.getTrendingMoviesAndSeries()
-        const popularMoviesData = await api.getPopularMovies()
-        const popularSeriesData = await api.getTrendingSeries()
-        setPopularSeries(popularSeriesData)
-        setPopularMovies(popularMoviesData)
-        setSwapperMovies(swapperData)
-        setLoading(true)
-      } catch (error) {
-        console.error('Error fetching trending movies and series:', error)
-      } finally {
-        setLoading(false)
-      }
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["homeData"],
+    queryFn: async () => {
+      const [swapper, movies, series] = await Promise.all([
+        api.getTrendingMoviesAndSeries(),
+        api.getTrendingMoviesAndSeries(),
+        api.getTrendingSeries(),
+      ])
+      return {swapper, movies, series}
     }
-
-    fetchData()
-  }, [])
+  })
   
+  if(isError) {
+    return <div>Произошла ошибка</div>
+  }
   return (
-    <div>
-      {loading ? <Loading /> : <>
-        <MovieSwapper content={swapperMovies} />
-        <PopularMovies movies={popularMovies} onTrailer={setMovieWithTrailerId} />
+    <main>
+      {isLoading ? <Loading /> : <>
+        <MovieSwapper content={data.swapper} />
+        <PopularMovies movies={data.movies} onTrailer={setMovieWithTrailerId} />
         {movieWithTrailerId ? <TrailerPreview movieId={movieWithTrailerId} /> : ''}
-        <PopularSeries series={popularSeries} />
+        <PopularSeries series={data.series} />
       </>}
-    </div>
+    </main>
   )
 }
 

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import styles from './PopularMovies.module.css'
-import api from '../../services/api'
+
 import Container from '../Container/Container'
 import MovieSlider from '../MovieScroll/MovieSlider'
 
 import { IoIosArrowForward } from "react-icons/io";
-import TrailerPreview from '../TrailerPreview/TrailerPreview'
 import { Link } from 'react-router-dom'
 
 const Popular = ({onTrailer, movies}) => {

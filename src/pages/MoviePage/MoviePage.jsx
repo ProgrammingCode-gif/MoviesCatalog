@@ -1,57 +1,48 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import api from '../../services/api'
 import MoviePageHeader from '../../components/MoviePageHeader/MoviePageHeader'
 import MoviePageMain from '../../components/MoviePageMain/MoviePageMain'
 import Loading from '../../components/Loading/Loading'
+import { useQuery } from '@tanstack/react-query'
 
-const MoviePage = ({series = false}) => {
+const MoviePage = ({ series = false }) => {
     const { movieId } = useParams()
-    const [movie, setMovie] = useState()
-    const [cast, setCast] = useState()
-    const [loading, setLoading] = useState(true)
     const [isTrailerOpened, setIsTrailerOpened] = useState(false)
-    const [trailerUrl, setTrailerUrl] = useState()
 
-    useEffect(() => {
-        const getMovie = async () => {
-            try {
-                setLoading(true)
-
-                const data = await api.getMovieDetails(movieId, series)
-                const castData = await api.getCast(movieId, series)
-
-                const trailerData = await api.getMovieTrailerUrl(movieId, 0, series)
-
-                setTrailerUrl(trailerData)
-                setMovie(data)
-                setCast(castData.slice(0, 5))
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setLoading(false)
-            }
+    const { data, isLoading } = useQuery({
+        queryKey: ["movieDetail"],
+        queryFn: async () => {
+            const [movie, cast, trailerUrl] = await Promise.all([
+                api.getMovieDetails(movieId, series),
+                api.getCast(movieId, series),
+                api.getMovieTrailerUrl(movieId, 0, series)
+            ])
+            
+            return { movie, cast: cast.slice(0, 5), trailerUrl }
         }
-        getMovie()
+    })    
 
-        return () => {
-            setMovie(null)
-            setCast(null)
-            setTrailerUrl(null)
-            setIsTrailerOpened(false)
-        }
-    }, [movieId])
+    if(isLoading) return <div className="loading-container"><Loading /></div>
     return (
         <>
-            {loading && <div className="loading-container"><Loading /></div>}
-            <div>
-                {!loading && <MoviePageHeader trailerUrl={trailerUrl} isTrailerOpened={isTrailerOpened} onTrailer={() => setIsTrailerOpened(prev => !prev)} movie={movie} cast={cast} />
+            <header>   
+                <MoviePageHeader
+                    trailerUrl={data.trailerUrl}
+                    isTrailerOpened={isTrailerOpened}
+                    onTrailer={() => setIsTrailerOpened(prev => !prev)}
+                    movie={data.movie}
+                    cast={data.cast}
+                />
+            </header>
 
-                }
-            </div>
-            {
-                !loading && <MoviePageMain trailerUrl={trailerUrl} isTrailerOpened={isTrailerOpened} movie={movie} isSeries={series}/>
-            }
+            <MoviePageMain
+                trailerUrl={data.trailerUrl}
+                isTrailerOpened={isTrailerOpened}
+                movie={data.movie}
+                isSeries={series}
+            />
+
         </>
     )
 }

@@ -1,14 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Genres.module.css'
-import Container from '../../components/Container/Container'
 import api from '../../services/api'
+
 import GenreGroup from '../../components/Genres/GenreGroup/GenreGroup'
 import Loading from '../../components/Loading/Loading'
+import { useQuery } from '@tanstack/react-query'
 
 const Genres = () => {
     const [genres, setGenres] = useState([])
     const [genreMovies, setGenreMovies] = useState({});
     const [loading, setLoading] = useState(true)
+
+    // const { } = useQuery({
+    //     queryKey: ["genresData"],
+    //     queryFn: async () => {
+    //         const genres = await api.getMoviesGenres()
+    //         const moviesPromises = genresData.map(async (genre) => {
+    //             const movies = await api.getMoviesByGenre(genre.id, 1);
+    //             return {
+    //                 id: genre.id,
+    //                 data: {
+    //                     page: 1,
+    //                     movies,
+    //                 }
+    //             };
+    //         })
+    //         const moviesData = await Promise.all(moviesPromises)
+    //         const moviesByGenre = {}
+    //         moviesData.forEach(({ id, data }) => {
+    //             moviesByGenre[id] = data;
+    //         });
+
+    //         return {genres, genreMovies: moviesByGenre }
+    //     }
+    // })
 
     useEffect(() => {
         const getGenres = async () => {
@@ -30,11 +55,11 @@ const Genres = () => {
 
                 const moviesData = await Promise.all(moviesPromises);
                 const moviesByGenre = {}
-                
+
                 moviesData.forEach(({ id, data }) => {
                     moviesByGenre[id] = data;
                 });
-                
+
                 setGenreMovies(moviesByGenre);
             } catch (error) {
                 console.log(error);

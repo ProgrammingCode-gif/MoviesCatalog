@@ -1,50 +1,47 @@
-import React, { useEffect, useState } from 'react'
 import MovieListInfinite from '../../components/MovieListInfinite/MovieListInfinite'
 import Container from '../../components/Container/Container'
 import styles from './Movies.module.css'
 import api from '../../services/api'
 import MovieSwapper from '../../components/MovieSwapper/MovieSwapper'
 import Loading from '../../components/Loading/Loading'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
 const Movies = () => {
+    const { data: swapperContent, isLoading } = useQuery({
+        queryKey: ['trendingMovies'],
+        queryFn: async () => await api.getTrendingMovies()
+    })
 
-    const [swapperContent, setSwapperContent] = useState([])
-    const [content, setContent] = useState([])
-    const [page, setPage] = useState(1)
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        const getContent = async () => {
-            try {
-                if (page === 1) {
-                    setLoading(true)
-                    const swapperData = await api.getTrendingMovies()
-                    setSwapperContent(swapperData)
-                }
-                const contentData = await api.getPopularMovies(page)
-                setContent((prev) => {
-                    const combined = [...prev, ...contentData]
-                    const unique = Array.from(new Set(combined.map(movie => movie.id)))
-                        .map(id => combined.find(movie => movie.id === id))
-                    return unique
-                })
-
-            } catch (error) {
-                console.error('Ошибка при получении сериалов:', error)
-            } finally {
-                if (page === 1) setLoading(false)
-            }
+    const {
+        data: moviesPage, 
+        fetchNextPage, 
+        hasNextPage,
+        isFetchingNextPage,
+        isLoading: isMoviesLoading
+    } = useInfiniteQuery({
+        queryKey: ["popularMovies"],
+        queryFn: async ({pageParam = 1}) => await api.getPopularMovies(pageParam),
+        getNextPageParam: (lastPage, allPages) => {
+            return lastPage.length > 0 ? allPages.length + 1 : undefined
         }
-        getContent()
-    }, [page])
+    })
+
+    const movies = moviesPage?.pages.flat() || []
 
     return (
         <div className={styles.wrapper}>
-            {loading ? <Loading /> : <>
+            {isLoading || isMoviesLoading ? <Loading /> : <>
                 <MovieSwapper content={swapperContent} />
                 <Container>
                     <h2 className={styles.title}>Популярные фильмы</h2>
-                    <MovieListInfinite onPage={setPage} content={content} />
+                    <MovieListInfinite
+                        content={movies} 
+                        onPage={() => {
+                            if(hasNextPage && !isFetchingNextPage) {
+                                fetchNextPage()
+                            }
+                        }}
+                    /> 
                 </Container>
             </>}
         </div>

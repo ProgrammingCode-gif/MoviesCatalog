@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import { EffectFade, Autoplay } from "swiper/modules";
 import MovieSwapperItem from "../MovieSwapperItem/MovieSwapperItem";
 
-const MovieSwapper = ({content}) => {
+const MovieSwapper = memo(({content}) => {
     const [activeMovie, setActiveMovie] = useState(null);
     const [nextMovieIndex, setNextMovieIndex] = useState(1)
 
@@ -42,6 +42,6 @@ const MovieSwapper = ({content}) => {
             }
         </Swiper>
     )
-}
+})
 
 export default MovieSwapper
