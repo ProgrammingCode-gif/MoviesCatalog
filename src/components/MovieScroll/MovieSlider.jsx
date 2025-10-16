@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -9,10 +9,10 @@ import MovieCard from '../MovieCard/MovieCard';
 import Container from '../Container/Container';
 
 import { SlArrowRight, SlArrowLeft } from 'react-icons/sl';
-import TopRatedCard from '../TopRatedCard/TopRatedCard';
 import { Link } from 'react-router-dom';
+import SkeletonCard from '../SkeletonCard/SkeletonCard';
 
-const MovieSlider = ({ movies, topRated, series = false, onReachEnd }) => {
+const MovieSlider = ({ movies, topRated, series = false, onReachEnd, loading }) => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
 
@@ -57,7 +57,6 @@ const MovieSlider = ({ movies, topRated, series = false, onReachEnd }) => {
     }, [updateNavigationState, onReachEnd]);
 
     return (
-
         <div className={styles.movieSlider}>
             <Container className={styles.sliderContainer}>
                 <Swiper
@@ -82,27 +81,26 @@ const MovieSlider = ({ movies, topRated, series = false, onReachEnd }) => {
                     }}
                     className={styles.swiper}
                 >{
-                        movies.map((movie, index) => (
+                        movies.map((movie) => (
                             <SwiperSlide key={movie.id} className={styles.movieItem}>
-                                {topRated ? (
-                                    <TopRatedCard top={index + 1} posterPath={movie.poster_path} />
-                                ) : (
-                                    <Link
-                                        className={styles.cardLink}
-                                        to={
-                                            movie.media_type === 'tv' || series
-                                                ? `/series/${movie.id}`
-                                                : `/movies/${movie.id}`
-                                        }
-                                    >
-                                        <MovieCard
-                                            posterPath={movie.poster_path}
-                                            title={movie.title || movie.name}
-                                        />
-                                    </Link>
-                                )}
+                                <Link
+                                    className={styles.cardLink}
+                                    to={
+                                        movie.media_type === 'tv' || series
+                                            ? `/series/${movie.id}`
+                                            : `/movies/${movie.id}`
+                                    }
+                                >
+                                    <MovieCard
+                                        posterPath={movie.poster_path}
+                                        title={movie.title || movie.name}
+                                    />
+                                </Link>
                             </SwiperSlide>
                         ))}
+                    {/* {loading && */}
+                        {Array.from(10).map(el => <SwiperSlide><SkeletonCard /></SwiperSlide>)}
+                    {/* } */}
                 </Swiper>
             </Container>
 

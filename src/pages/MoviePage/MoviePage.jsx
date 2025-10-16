@@ -11,7 +11,7 @@ const MoviePage = ({ series = false }) => {
     const [isTrailerOpened, setIsTrailerOpened] = useState(false)
 
     const { data, isLoading } = useQuery({
-        queryKey: ["movieDetail"],
+        queryKey: [`movieDetail${movieId}`],
         queryFn: async () => {
             const [movie, cast, trailerUrl] = await Promise.all([
                 api.getMovieDetails(movieId, series),

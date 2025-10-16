@@ -31,9 +31,9 @@ const Home = () => {
     <main>
       {isLoading ? <Loading /> : <>
         <MovieSwapper content={data.swapper} />
-        <PopularMovies movies={data.movies} onTrailer={setMovieWithTrailerId} />
-        {movieWithTrailerId ? <TrailerPreview movieId={movieWithTrailerId} /> : ''}
-        <PopularSeries series={data.series} />
+        <PopularMovies isLoading={isLoading} movies={data.movies} onTrailer={setMovieWithTrailerId} />
+        {movieWithTrailerId && <TrailerPreview movieId={movieWithTrailerId} />}
+        <PopularSeries loading={isLoading} series={data.series} />
       </>}
     </main>
   )

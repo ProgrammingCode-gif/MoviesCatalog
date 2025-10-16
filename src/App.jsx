@@ -12,6 +12,7 @@ function App() {
           <NavBar />
         </header>
           <AppRoutes />
+          
       </Router>
     </QueryClientProvider>
   )

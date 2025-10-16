@@ -7,7 +7,7 @@ import MovieSlider from '../MovieScroll/MovieSlider'
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from 'react-router-dom'
 
-const Popular = ({onTrailer, movies}) => {
+const Popular = ({onTrailer, movies, loading}) => {
 
     useEffect(() => {
         const getMovies = async () => {
@@ -28,7 +28,7 @@ const Popular = ({onTrailer, movies}) => {
                 <Link to={"/movies"} className={styles.title}>Популярное <IoIosArrowForward /></Link>
             </Container>
 
-            <MovieSlider movies={movies}></MovieSlider>
+            <MovieSlider loading={loading} movies={movies}></MovieSlider>
 
         </section>
     )

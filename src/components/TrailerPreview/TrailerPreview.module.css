@@ -112,13 +112,19 @@
 }
 
 .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
     padding: 10px 15px;
-    background: white;
+    width: fit-content;
+    background: linear-gradient(90deg, #ffffff 0%, #d9e7ff 100%);
     color: black;
     border-radius: 10px;
     cursor: pointer;
     outline: none;
-    border: none;
+    /* border: none; */
+    /* font-size: 20px; */
 }
 
 @media (max-width: 1200px) {

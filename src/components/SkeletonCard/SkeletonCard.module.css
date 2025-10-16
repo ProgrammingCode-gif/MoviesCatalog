@@ -1,0 +1,8 @@
+.skeletonCard {
+    max-width: 300px;
+    width: 200px;
+    margin: 10px 0 10px 0;
+    box-shadow: 0 4px 4px black;
+    border-radius: 8px;
+    background: #000;
+}
