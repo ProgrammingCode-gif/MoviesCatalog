@@ -6,6 +6,7 @@ import Search from '../pages/Search/Search';
 import Movies from '../pages/Movies/Movies';
 import Series from '../pages/Series/Series';
 import Genres from '../pages/Genres/Genres';
+import Signup from '../pages/Signup/Signup';
 
 const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AppRoutes = () => {
         <Route path='/movies/:movieId' element={<MoviePage />}/>
         <Route path='/series/:movieId' element={<MoviePage series={true} />}/>
         <Route path='*' element={<NotFound />}/>
+        <Route path='/signup' element={<Signup />} />
     </Routes>
   )
 }
