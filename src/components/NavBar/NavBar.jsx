@@ -51,6 +51,10 @@ const NavBar = () => {
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/search"><FiSearch className={`${styles.linkIcon} ${styles.searchIcon}`} /></NavLink>
                     </li>
                 </ul>
+                <div className={styles.authBtns}>
+                    <Link className={styles.authBtn} to={"/signin"}>Войти</Link>
+                    <Link className={styles.authBtn} to={"/signup"}>Зарегистрироваться</Link>
+                </div>
                 <ul className={styles.navBarListMobile}>
                     <li>
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive} ${styles.search}` : `${styles.navBarLink} ${styles.searchLink}`} to="/search"><FiSearch className={`${styles.linkIcon} ${styles.searchIcon}`} /></NavLink>

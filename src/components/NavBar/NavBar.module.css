@@ -64,6 +64,38 @@
     color: rgb(255, 255, 255);
 }
 
+.authBtns {
+    position: absolute;
+    right: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.authBtn {
+    outline: none;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: 300ms all;
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.219);
+}
+
+.authBtn:first-child {
+    background: white;
+    color: black;
+}
+
+.authBtn:last-child {
+    background: linear-gradient(135deg, #33ad6e, #502db3);
+}
+
+.authBtn:hover {
+    transform: translateY(-3px);
+}
+
 .burgerMenu {
     padding: 0 0 0 28px;
     position: absolute;
