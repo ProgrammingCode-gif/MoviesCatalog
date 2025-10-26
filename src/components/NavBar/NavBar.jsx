@@ -63,7 +63,7 @@ const NavBar = () => {
                     <div className={styles.userInfo}>
                         <p className={styles.userName}>{user.username}</p>
                         {user.avatar_url ?
-                            "" 
+                            <image src={user.avatar_url} />
                             :
                             <FaUser />
                         }

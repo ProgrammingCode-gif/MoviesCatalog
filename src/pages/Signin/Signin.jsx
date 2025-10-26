@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
-import SigninForm from "../../components/SignInForm/SignInForm"
 import styles from "./Signin.module.css"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import SigninForm from "../../components/SigninForm/SigninForm"
 
 const Signin = () => {
     const user = useSelector(state => state.user)
