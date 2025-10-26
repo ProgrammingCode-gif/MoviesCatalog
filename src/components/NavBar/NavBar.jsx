@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import styles from './NavBar.module.css'
-import { Link, NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 import Container from '../Container/Container'
+import { Link, NavLink } from 'react-router-dom'
+import BurgerMenuBtn from '../BurgerMenuBtn/BurgerMenuBtn';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { FiSearch } from "react-icons/fi";
 import { RiHome2Line } from "react-icons/ri";
 import { MdOutlineMovie } from "react-icons/md";
 import { MdOutlineLocalMovies } from "react-icons/md";
 import { RiFilmAiLine } from "react-icons/ri";
-import BurgerMenuBtn from '../BurgerMenuBtn/BurgerMenuBtn';
-import { AnimatePresence, motion } from 'framer-motion';
+import { FaUser } from "react-icons/fa6";
 
 const NavBar = () => {
 
     const [scrolled, setScrolled] = useState(false);
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+    const user = useSelector(state => state.user)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -51,10 +54,21 @@ const NavBar = () => {
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive}` : styles.navBarLink} to="/search"><FiSearch className={`${styles.linkIcon} ${styles.searchIcon}`} /></NavLink>
                     </li>
                 </ul>
-                <div className={styles.authBtns}>
-                    <Link className={styles.authBtn} to={"/signin"}>Войти</Link>
-                    <Link className={styles.authBtn} to={"/signup"}>Зарегистрироваться</Link>
-                </div>
+                {!user ?
+                    <div className={styles.authBtns}>
+                        <Link className={styles.authBtn} to={"/signin"}>Войти</Link>
+                        <Link className={styles.authBtn} to={"/signup"}>Зарегистрироваться</Link>
+                    </div>
+                    :
+                    <div className={styles.userInfo}>
+                        <p className={styles.userName}>{user.username}</p>
+                        {user.avatar_url ?
+                            "" 
+                            :
+                            <FaUser />
+                        }
+                    </div>
+                }
                 <ul className={styles.navBarListMobile}>
                     <li>
                         <NavLink className={({ isActive }) => isActive ? `${styles.navBarLink} ${styles.navBarLinkActive} ${styles.search}` : `${styles.navBarLink} ${styles.searchLink}`} to="/search"><FiSearch className={`${styles.linkIcon} ${styles.searchIcon}`} /></NavLink>
